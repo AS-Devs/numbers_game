@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:numbers_game/models/fact.dart';
 
-String baseURL = " http://numbersapi.com/";
+String baseURL = "http://numbersapi.com/";
 
 Map<String, String> requestHeaders = {
   'Content-type': 'application/json',
