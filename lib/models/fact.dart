@@ -1,4 +1,3 @@
-
 class Fact {
   final String text;
   final bool found;
@@ -10,8 +9,9 @@ class Fact {
   Fact(this.text, this.found, this.number, this.type,
       {this.date = "", this.year = ""});
 
-  factory Fact.fromJson(Map<String, dynamic> json) =>
-      new Fact(json["text"], json["found"], json["number"].toString(), json["type"]);
+  factory Fact.fromJson(Map<String, dynamic> json) => new Fact(
+      json["text"], json["found"], json["number"].toString(), json["type"],
+      date: json["date"].toString(), year: json["year"].toString());
 
   Map<String, dynamic> toJson() => {
         'text': text,

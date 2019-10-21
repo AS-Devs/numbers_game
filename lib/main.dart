@@ -27,7 +27,7 @@ class _FisrtScreenState extends State<FisrtScreen> {
   @override
   void initState() {
     super.initState();
-    factFuture = getRandomFact();
+    factFuture = getYearFact(2019);
   }
 
   @override
@@ -97,7 +97,7 @@ class _FisrtScreenState extends State<FisrtScreen> {
                     RaisedButton(
                       onPressed: () {
                         setState(() {
-                          factFuture = getRandomFact();
+                          factFuture = getDateFact(20);
                         });
                       },
                       textColor: Colors.white,

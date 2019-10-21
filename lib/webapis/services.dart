@@ -24,3 +24,31 @@ Future<Fact> getRandomFact() async {
         StackTrace.fromString("Unable to fetch random fact"));
   }
 }
+
+Future<Fact> getYearFact(int year) async {
+  final response = await http
+      .get("$baseURL/$year/year", headers: requestHeaders)
+      .timeout(Duration(seconds: 10));
+
+  if (response.statusCode == 200) {
+    Map factMap = jsonDecode(response.body);
+    return Fact.fromJson(factMap);
+  } else {
+    return Future.error("Unable to fetch random fact",
+        StackTrace.fromString("Unable to fetch random fact"));
+  }
+}
+
+Future<Fact> getDateFact(int date) async {
+  final response = await http
+      .get("$baseURL/$date/date", headers: requestHeaders)
+      .timeout(Duration(seconds: 10));
+
+  if (response.statusCode == 200) {
+    Map factMap = jsonDecode(response.body);
+    return Fact.fromJson(factMap);
+  } else {
+    return Future.error("Unable to fetch random fact",
+        StackTrace.fromString("Unable to fetch random fact"));
+  }
+}
