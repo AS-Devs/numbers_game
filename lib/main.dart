@@ -23,11 +23,13 @@ class FisrtScreen extends StatefulWidget {
 
 class _FisrtScreenState extends State<FisrtScreen> {
   Future<Fact> factFuture;
+  TextEditingController controller;
 
   @override
   void initState() {
     super.initState();
-    factFuture = getYearFact(2019);
+    controller = TextEditingController();
+    factFuture = getYearFact(year: 2019.toString());
   }
 
   @override
@@ -53,6 +55,16 @@ class _FisrtScreenState extends State<FisrtScreen> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
+                    TextField(
+                      decoration: InputDecoration(
+                          border: UnderlineInputBorder(),
+                          labelText: 'Enter a number (Optional)',
+                          contentPadding: EdgeInsets.all(10)),
+                      keyboardType: TextInputType.number,
+                      textInputAction: TextInputAction.done,
+                      textAlign: TextAlign.start,
+                      controller: controller,
+                    ),
                     FutureBuilder<Fact>(
                       future: factFuture,
                       builder: (context, snapshot) {
@@ -97,7 +109,13 @@ class _FisrtScreenState extends State<FisrtScreen> {
                     RaisedButton(
                       onPressed: () {
                         setState(() {
-                          factFuture = getDateFact(20);
+                          FocusScope.of(context).unfocus();
+                          if (controller.text != null &&
+                              controller.text.length > 0) {
+                            factFuture = getMathFact(number: controller.text);
+                          } else {
+                            factFuture = getMathFact();
+                          }
                         });
                       },
                       textColor: Colors.white,
