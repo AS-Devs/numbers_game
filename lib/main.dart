@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:numbers_game/screens/home_page.dart';
 
 void main() => runApp(NumbersGame());
@@ -6,6 +7,9 @@ void main() => runApp(NumbersGame());
 class NumbersGame extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarColor: Colors.lightBlue,
+    ));
     return MaterialApp(
       title: 'Numbers Game',
       theme: _theme(),

@@ -9,15 +9,106 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  Container activeContainer = Container(
+    child: Center(
+      child: Text("This is Home"),
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     return Container(
         child: Scaffold(
+      extendBody: true,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(80),
-        child: CurvedAppBar(),
+        child: const CurvedAppBar(),
       ),
-      drawer: Drawer(),
+      drawer: buildDrawer(context),
+      body: activeContainer,
     ));
+  }
+
+  Drawer buildDrawer(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        padding: const EdgeInsets.all(
+            0.0), // Workaround for Statusbar color bug when drawer is open
+        children: <Widget>[
+          UserAccountsDrawerHeader(
+            accountName: Text(
+              "Numbers API",
+              style: TextStyle(color: Colors.white),
+            ),
+            accountEmail: Text("Made with \u{1F497} by AS Devs",
+                style: TextStyle(color: Colors.white)),
+            decoration: BoxDecoration(color: Colors.lightBlue),
+          ),
+          ListTile(
+            title: Text("Home"),
+            leading: Icon(Icons.home),
+            trailing: Icon(Icons.arrow_forward),
+            onTap: () {
+              setState(() {
+                _drawerItemSelected(0);
+              });
+              Navigator.of(context).pop();
+            },
+          ),
+          ListTile(
+            title: Text("Settings"),
+            leading: Icon(Icons.settings),
+            trailing: Icon(Icons.arrow_forward),
+            onTap: () {
+              setState(() {
+                _drawerItemSelected(1);
+              });
+              Navigator.of(context).pop();
+            },
+          ),
+          ListTile(
+            title: Text("About"),
+            leading: Icon(Icons.info),
+            trailing: Icon(Icons.arrow_forward),
+            onTap: () {
+              setState(() {
+                _drawerItemSelected(2);
+              });
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  _drawerItemSelected(int index) {
+    switch (index) {
+      case 0:
+        activeContainer = Container(
+          child: Center(
+            child: Text(
+              "This is Home",
+            ),
+          ),
+        );
+        break;
+      case 1:
+        activeContainer = Container(
+          child: Center(
+            child: Text("This is Settings"),
+          ),
+        );
+        break;
+      case 2:
+        activeContainer = Container(
+          child: Center(
+            child: Text("This is About"),
+          ),
+        );
+        break;
+      default:
+        break;
+    }
   }
 }
