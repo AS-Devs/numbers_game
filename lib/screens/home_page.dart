@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:numbers_game/providers/theme_provider.dart';
 import 'package:numbers_game/widgets/curved_appbar.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -30,6 +32,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Drawer buildDrawer(BuildContext context) {
+    final themeProvider = Provider.of<DynamicTheme>(context);
     return Drawer(
       child: ListView(
         padding: const EdgeInsets.all(
@@ -50,7 +53,7 @@ class _HomePageState extends State<HomePage> {
             trailing: Icon(Icons.arrow_forward),
             onTap: () {
               setState(() {
-                _drawerItemSelected(0);
+                _drawerItemSelected(0, themeProvider);
               });
               Navigator.of(context).pop();
             },
@@ -61,7 +64,7 @@ class _HomePageState extends State<HomePage> {
             trailing: Icon(Icons.arrow_forward),
             onTap: () {
               setState(() {
-                _drawerItemSelected(1);
+                _drawerItemSelected(1, themeProvider);
               });
               Navigator.of(context).pop();
             },
@@ -72,7 +75,7 @@ class _HomePageState extends State<HomePage> {
             trailing: Icon(Icons.arrow_forward),
             onTap: () {
               setState(() {
-                _drawerItemSelected(2);
+                _drawerItemSelected(2, themeProvider);
               });
               Navigator.of(context).pop();
             },
@@ -82,7 +85,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  _drawerItemSelected(int index) {
+  _drawerItemSelected(int index, DynamicTheme themeProvider) {
     switch (index) {
       case 0:
         activeContainer = Container(
@@ -96,7 +99,22 @@ class _HomePageState extends State<HomePage> {
       case 1:
         activeContainer = Container(
           child: Center(
-            child: Text("This is Settings"),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+              RaisedButton(
+                child: Text("Change Theme"),
+                onPressed: (){
+                  themeProvider.changeTheme(!themeProvider.isDarkTheme());
+                },
+              ),
+              RaisedButton(
+                child: Text("Change Primary Color"),
+                onPressed: (){
+                  themeProvider.changePrimaryColor(Colors.green);
+                },
+              )
+            ],),
           ),
         );
         break;
