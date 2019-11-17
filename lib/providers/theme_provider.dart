@@ -1,46 +1,18 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-//import 'package:shared_preferences/shared_preferences.dart';
+import 'package:numbers_game/models/themes.dart';
+import 'package:numbers_game/utils/shared_prefs.dart';
 
 class DynamicTheme with ChangeNotifier {
-  static const dark_mode_key = "isDarkMode";
-  static const primary_color_key = "primaryColor";
+  ThemeData _theme = lightTheme;
 
-  //SharedPreferences prefs;
-  bool _isDarkTheme = false;
-  Color _primaryColor = Colors.lightBlue;
+  ThemeData get getTheme => _theme;
 
-  isDarkTheme() => this._isDarkTheme;
+  DynamicTheme(this._theme);
 
-  primaryColor() => this._primaryColor;
-
-  void changeTheme(isDarkMode) {
-    this._isDarkTheme = isDarkMode;
+  set setTheme(ThemeData theme) {
+    _theme = theme;
+    SharedPrefs.setThemeValue(theme);
     notifyListeners();
   }
-
-  void changePrimaryColor(primaryColor) {
-    _primaryColor = primaryColor;
-    notifyListeners();
-  }
-
-  // Shared Preference Actions
-  // _setDarkThemeValue(isDarkMode) async {
-  //   if (prefs == null) {
-  //     prefs = await SharedPreferences.getInstance();
-  //   }
-  //   prefs.setBool(dark_mode_key, isDarkMode);
-  // }
-
-  // Future<bool> _getDarkThemeValue() async {
-  //   if (prefs == null) {
-  //     prefs = await SharedPreferences.getInstance();
-  //   }
-  //   if (prefs.containsKey(dark_mode_key)) {
-  //     return prefs.getBool(dark_mode_key);
-  //   } else {
-  //     _setDarkThemeValue(false);
-  //     return false;
-  //   }
-  // }
 }

@@ -1,37 +1,55 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:numbers_game/models/themes.dart';
 import 'package:numbers_game/providers/theme_provider.dart';
 import 'package:numbers_game/screens/home_page.dart';
+import 'package:numbers_game/utils/shared_prefs.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(ChangeNotifierProvider<DynamicTheme>(
-      builder: (_) => DynamicTheme(),
-      child: NumbersGame(),
-    ));
+void main() {
+  SharedPrefs.getThemeValue().then((themeInt) {
+    //var themeInt = prefs.getInt("Theme") ?? 1;
+    if (themeInt == ThemeType.light.index) {
+      runApp(ChangeNotifierProvider<DynamicTheme>(
+        builder: (_) => DynamicTheme(lightTheme),
+        child: NumbersGame(),
+      ));
+    } else if (themeInt == ThemeType.dark.index) {
+      runApp(ChangeNotifierProvider<DynamicTheme>(
+        builder: (_) => DynamicTheme(darkTheme),
+        child: NumbersGame(),
+      ));
+    } else {
+      runApp(ChangeNotifierProvider<DynamicTheme>(
+        builder: (_) => DynamicTheme(lightTheme),
+        child: NumbersGame(),
+      ));
+    }
+  });
+}
 
-class NumbersGame extends StatelessWidget {
+class NumbersGame extends StatefulWidget {
+  @override
+  _NumbersGameState createState() => _NumbersGameState();
+
+  static setNavBarColor(DynamicTheme themeProvider) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarColor: themeProvider.getTheme.primaryColor,
+    ));
+  }
+}
+
+class _NumbersGameState extends State<NumbersGame> {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<DynamicTheme>(context);
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      systemNavigationBarColor: Colors.lightBlue,
+      systemNavigationBarColor: themeProvider.getTheme.primaryColor,
     ));
     return MaterialApp(
       title: 'Numbers Game',
-      theme: _theme(themeProvider),
+      theme: themeProvider.getTheme,
       home: HomePage(),
     );
   }
-
-  // todo: Will implement selectable thme & color for users later
-  ThemeData _theme(DynamicTheme themeProvider) {
-    return ThemeData(
-        primarySwatch: themeProvider.primaryColor(),
-        brightness:
-            themeProvider.isDarkTheme() ? Brightness.dark : Brightness.light);
-  }
-
-  // todo: Will generate routes later here
-  // RouteFactory _routes() {
-  // }
 }

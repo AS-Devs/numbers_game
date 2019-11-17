@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:numbers_game/providers/theme_provider.dart';
+import 'package:numbers_game/screens/about_page.dart';
+import 'package:numbers_game/screens/main_page.dart';
+import 'package:numbers_game/screens/settings_page.dart';
 import 'package:numbers_game/widgets/curved_appbar.dart';
 import 'package:provider/provider.dart';
 
@@ -11,11 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Container activeContainer = Container(
-    child: Center(
-      child: Text("This is Home"),
-    ),
-  );
+  Widget activePage = const MainPage();
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +26,7 @@ class _HomePageState extends State<HomePage> {
         child: const CurvedAppBar(),
       ),
       drawer: buildDrawer(context),
-      body: activeContainer,
+      body: activePage,
     ));
   }
 
@@ -45,7 +44,8 @@ class _HomePageState extends State<HomePage> {
             ),
             accountEmail: Text("Made with \u{1F497} by AS Devs",
                 style: TextStyle(color: Colors.white)),
-            decoration: BoxDecoration(color: Colors.lightBlue),
+            decoration:
+                BoxDecoration(color: themeProvider.getTheme.primaryColor),
           ),
           ListTile(
             title: Text("Home"),
@@ -88,42 +88,13 @@ class _HomePageState extends State<HomePage> {
   _drawerItemSelected(int index, DynamicTheme themeProvider) {
     switch (index) {
       case 0:
-        activeContainer = Container(
-          child: Center(
-            child: Text(
-              "This is Home",
-            ),
-          ),
-        );
+        activePage = const MainPage();
         break;
       case 1:
-        activeContainer = Container(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-              RaisedButton(
-                child: Text("Change Theme"),
-                onPressed: (){
-                  themeProvider.changeTheme(!themeProvider.isDarkTheme());
-                },
-              ),
-              RaisedButton(
-                child: Text("Change Primary Color"),
-                onPressed: (){
-                  themeProvider.changePrimaryColor(Colors.green);
-                },
-              )
-            ],),
-          ),
-        );
+        activePage = const SettingsPage();
         break;
       case 2:
-        activeContainer = Container(
-          child: Center(
-            child: Text("This is About"),
-          ),
-        );
+        activePage = const AboutPage();
         break;
       default:
         break;
