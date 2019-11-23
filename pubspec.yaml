@@ -11,7 +11,7 @@ description: A Flutter app for giving awesome facts and trivia about Numbers.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 0.1.4
+version: 0.1.5
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -26,6 +26,8 @@ dependencies:
   http: ^0.12.0+2
   shared_preferences: ^0.5.4+5
   provider: ^3.1.0+1
+  url_launcher: ^5.2.5
+  transparent_image: ^1.0.0
 
 dev_dependencies:
   flutter_test:
