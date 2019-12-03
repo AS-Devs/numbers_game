@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
         child: Scaffold(
       extendBody: true,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(80),
+        preferredSize: Size.fromHeight(60),
         child: const CurvedAppBar(),
       ),
       drawer: buildDrawer(context),

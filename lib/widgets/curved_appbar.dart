@@ -16,8 +16,9 @@ class CurvedAppBar extends StatelessWidget {
       centerTitle: true,
       elevation: 8.0,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-            bottom: Radius.elliptical(MediaQuery.of(context).size.width, 80.0)),
+        borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(25.0),
+            bottomRight: Radius.circular(25.0)),
       ),
       brightness: Brightness.dark,
     );
