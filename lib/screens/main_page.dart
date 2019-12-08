@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:numberpicker/numberpicker.dart';
 import 'package:numbers_game/models/fact.dart';
 import 'package:numbers_game/providers/theme_provider.dart';
 import 'package:numbers_game/webapis/services.dart';
 import 'package:provider/provider.dart';
-//import 'package:vector_math/vector_math.dart' as math;
 
 class MainPage extends StatefulWidget {
   const MainPage({Key key}) : super(key: key);
@@ -14,11 +14,14 @@ class MainPage extends StatefulWidget {
 
 enum ApiType { trivia, year, date, math }
 
-class _MainPageState extends State<MainPage> {
+class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   ApiType _type = ApiType.trivia;
   List<bool> isSelectedFactTypes = [true, false, false, false];
   List<bool> isSelectedNumberTypes = [true, false];
   TextEditingController controller;
+  int _date = 1;
+  List<int> year = [1, 0, 0, 0];
+  bool buttonClicked = false;
 
   @override
   void initState() {
@@ -89,60 +92,40 @@ class _MainPageState extends State<MainPage> {
             },
           ),
         ),
-        Visibility(
-          visible: isSelectedNumberTypes[1] == true ? true : false,
-          maintainState: true,
-          maintainAnimation: true,
-          child: Container(
-            width: 150.0,
-            child: TextField(
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0)),
-                  // labelText: 'Enter a number',
-                  hintText: 'Enter Number',
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0)),
-              keyboardType: TextInputType.number,
-              textInputAction: TextInputAction.done,
-              textAlign: TextAlign.center,
-              controller: controller,
-            ),
+        AnimatedSize(
+          duration: Duration(milliseconds: 500),
+          curve: Curves.decelerate,
+          vsync: this,
+          child: _getInputChild(_type, themeProvider),
+        ),
+        ButtonTheme(
+          minWidth: 200.0,
+          height: 45.0,
+          child: RaisedButton(
+            child: buttonClicked
+                ? CircularProgressIndicator(
+                    valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
+                    strokeWidth: 3.0,
+                  )
+                : Text("Get Facts",
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 0.4)),
+            color: themeProvider.getTheme.primaryColor,
+            textColor: Colors.white,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0)),
+            onPressed: () {
+              setState(() {
+                buttonClicked = true;
+                FocusScope.of(context).unfocus();
+              });
+              _getFact();
+            },
           ),
         ),
-        RaisedButton(
-          child: Text("Get Facts",
-              style: TextStyle(
-                  fontSize: 16,
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 0.4)),
-          color: themeProvider.getTheme.primaryColor,
-          textColor: Colors.white,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-          onPressed: () {
-            _getFact();
-            setState(() {
-              FocusScope.of(context).unfocus();
-            });
-          },
-        ),
-        // FutureBuilder<Fact>(
-        //   future: factFuture,
-        //   builder: (con, snapshot) {
-        //     if (snapshot.hasData) {
-        //       Fact fact = snapshot.data;
-        //       if (snapshot.connectionState == ConnectionState.done) {
-        //         setState(() {
-        //           SchedulerBinding.instance.addPostFrameCallback((_) => _showFact(context, fact));
-        //           //_showFact(context, fact);
-        //         });
-        //       }
-        //     } else if (snapshot.hasError) {}
-        //     return Container(height: 0.0, width: 0.0);
-        //   },
-        // )
       ],
     );
   }
@@ -160,14 +143,14 @@ class _MainPageState extends State<MainPage> {
         if (isSelectedNumberTypes[0]) {
           _showFact(context, getYearFact());
         } else {
-          _showFact(context, getYearFact(year: controller.text));
+          _showFact(context, getYearFact(year: year.join()));
         }
         break;
       case ApiType.date:
         if (isSelectedNumberTypes[0]) {
           _showFact(context, getDateFact());
         } else {
-          _showFact(context, getDateFact(date: controller.text));
+          _showFact(context, getDateFact(date: _date.toString()));
         }
         break;
       case ApiType.math:
@@ -184,6 +167,9 @@ class _MainPageState extends State<MainPage> {
 
   void _showFact(BuildContext context, Future<Fact> factFuture) {
     factFuture.then((fact) {
+      setState(() {
+        buttonClicked = false;
+      });
       showGeneralDialog(
           barrierColor: Colors.black38,
           transitionBuilder: (context, ani1, ani2, widget) {
@@ -194,7 +180,7 @@ class _MainPageState extends State<MainPage> {
                 child: AlertDialog(
                   shape: UnderlineInputBorder(
                       borderRadius: BorderRadius.circular(16.0)),
-                  title: Text(fact.number),
+                  title: Text("Fact"),
                   content: Text(fact.text),
                   actions: <Widget>[
                     FlatButton(
@@ -202,7 +188,9 @@ class _MainPageState extends State<MainPage> {
                         "OK",
                         style: TextStyle(color: Theme.of(context).primaryColor),
                       ),
-                      onPressed: () => Navigator.pop(context),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                     )
                   ],
                 ),
@@ -215,5 +203,113 @@ class _MainPageState extends State<MainPage> {
           context: context,
           pageBuilder: (context, animation1, animation2) {});
     });
+  }
+
+  _getInputChild(ApiType apiType, DynamicTheme themeProvider) {
+    if (isSelectedNumberTypes[0]) {
+      return Container(height: 0.0, width: 0.0);
+    } else {
+      switch (apiType) {
+        case ApiType.trivia:
+        case ApiType.math:
+          return Container(
+            width: 200.0,
+            child: TextField(
+              decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: themeProvider.getTheme.primaryColor,
+                          width: 2.0),
+                      borderRadius: BorderRadius.circular(10.0)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: themeProvider.getTheme.primaryColor,
+                          width: 2.0),
+                      borderRadius: BorderRadius.circular(10.0)),
+                  // labelText: 'Enter a number',
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: themeProvider.getTheme.primaryColor,
+                  ),
+                  focusColor: themeProvider.getTheme.primaryColor,
+                  fillColor: themeProvider.getTheme.primaryColor,
+                  hintText: 'Enter Number',
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0)),
+              keyboardType: TextInputType.number,
+              textInputAction: TextInputAction.done,
+              textAlign: TextAlign.center,
+              controller: controller,
+            ),
+          );
+          break;
+        case ApiType.date:
+          return NumberPicker.integer(
+            decoration: BoxDecoration(),
+            initialValue: _date,
+            minValue: 1,
+            maxValue: 31,
+            onChanged: (newValue) {
+              setState(() {
+                _date = newValue;
+              });
+            },
+          );
+          break;
+        case ApiType.year:
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              NumberPicker.integer(
+                listViewWidth: 70.0,
+                initialValue: year[0],
+                minValue: 1,
+                maxValue: 9,
+                onChanged: (newValue) {
+                  setState(() {
+                    year[0] = newValue;
+                  });
+                },
+              ),
+              NumberPicker.integer(
+                listViewWidth: 70.0,
+                initialValue: year[1],
+                minValue: 0,
+                maxValue: 9,
+                onChanged: (newValue) {
+                  setState(() {
+                    year[1] = newValue;
+                  });
+                },
+              ),
+              NumberPicker.integer(
+                listViewWidth: 70.0,
+                initialValue: year[2],
+                minValue: 0,
+                maxValue: 9,
+                onChanged: (newValue) {
+                  setState(() {
+                    year[2] = newValue;
+                  });
+                },
+              ),
+              NumberPicker.integer(
+                listViewWidth: 70.0,
+                initialValue: year[3],
+                minValue: 0,
+                maxValue: 9,
+                onChanged: (newValue) {
+                  setState(() {
+                    year[3] = newValue;
+                  });
+                },
+              )
+            ],
+          );
+          break;
+        default:
+          break;
+      }
+    }
   }
 }
