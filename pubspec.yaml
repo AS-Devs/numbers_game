@@ -14,7 +14,7 @@ description: A Flutter app for giving awesome facts and trivia about Numbers.
 version: 0.1.6
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
   flutter:

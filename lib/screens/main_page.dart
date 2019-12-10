@@ -207,7 +207,8 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
 
   _getInputChild(ApiType apiType, DynamicTheme themeProvider) {
     if (isSelectedNumberTypes[0]) {
-      return Container(height: 0.0, width: 0.0);
+      //return Container(height: 0.0, width: 0.0);
+      return SizedBox.shrink();
     } else {
       switch (apiType) {
         case ApiType.trivia:
@@ -260,50 +261,18 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           return Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              NumberPicker.integer(
-                listViewWidth: 70.0,
-                initialValue: year[0],
-                minValue: 1,
-                maxValue: 9,
-                onChanged: (newValue) {
-                  setState(() {
-                    year[0] = newValue;
-                  });
-                },
-              ),
-              NumberPicker.integer(
-                listViewWidth: 70.0,
-                initialValue: year[1],
-                minValue: 0,
-                maxValue: 9,
-                onChanged: (newValue) {
-                  setState(() {
-                    year[1] = newValue;
-                  });
-                },
-              ),
-              NumberPicker.integer(
-                listViewWidth: 70.0,
-                initialValue: year[2],
-                minValue: 0,
-                maxValue: 9,
-                onChanged: (newValue) {
-                  setState(() {
-                    year[2] = newValue;
-                  });
-                },
-              ),
-              NumberPicker.integer(
-                listViewWidth: 70.0,
-                initialValue: year[3],
-                minValue: 0,
-                maxValue: 9,
-                onChanged: (newValue) {
-                  setState(() {
-                    year[3] = newValue;
-                  });
-                },
-              )
+              for (int index = 0; index < year.length; index++)
+                NumberPicker.integer(
+                  listViewWidth: 70.0,
+                  initialValue: year[index],
+                  minValue: 0,
+                  maxValue: 9,
+                  onChanged: (newValue) {
+                    setState(() {
+                      year[index] = newValue;
+                    });
+                  },
+                )
             ],
           );
           break;
