@@ -36,33 +36,36 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         Center(
-          child: ToggleButtons(
-            children: <Widget>[
-              Text("Trivia"),
-              Text("Year"),
-              Text("Date"),
-              Text("Math")
-            ],
-            selectedColor: Colors.white,
-            fillColor: themeProvider.getTheme.primaryColor,
-            borderRadius: BorderRadius.circular(10.0),
-            borderColor: themeProvider.getTheme.primaryColor,
-            selectedBorderColor: themeProvider.getTheme.primaryColor,
-            isSelected: isSelectedFactTypes,
-            onPressed: (int index) {
-              setState(() {
-                for (int buttonIndex = 0;
-                    buttonIndex < isSelectedFactTypes.length;
-                    buttonIndex++) {
-                  if (buttonIndex == index) {
-                    isSelectedFactTypes[buttonIndex] = true;
-                    _type = ApiType.values[index];
-                  } else {
-                    isSelectedFactTypes[buttonIndex] = false;
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: ToggleButtons(
+              children: <Widget>[
+                Text("Trivia"),
+                Text("Year"),
+                Text("Date"),
+                Text("Math")
+              ],
+              selectedColor: Colors.white,
+              fillColor: themeProvider.getTheme.primaryColor,
+              borderRadius: BorderRadius.circular(8.0),
+              borderColor: themeProvider.getTheme.primaryColor,
+              selectedBorderColor: themeProvider.getTheme.primaryColor,
+              isSelected: isSelectedFactTypes,
+              onPressed: (int index) {
+                setState(() {
+                  for (int buttonIndex = 0;
+                      buttonIndex < isSelectedFactTypes.length;
+                      buttonIndex++) {
+                    if (buttonIndex == index) {
+                      isSelectedFactTypes[buttonIndex] = true;
+                      _type = ApiType.values[index];
+                    } else {
+                      isSelectedFactTypes[buttonIndex] = false;
+                    }
                   }
-                }
-              });
-            },
+                });
+              },
+            ),
           ),
         ),
         Center(
@@ -73,7 +76,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
             ],
             selectedColor: Colors.white,
             fillColor: themeProvider.getTheme.primaryColor,
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(8.0),
             borderColor: themeProvider.getTheme.primaryColor,
             selectedBorderColor: themeProvider.getTheme.primaryColor,
             isSelected: isSelectedNumberTypes,
@@ -103,10 +106,14 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           height: 45.0,
           child: RaisedButton(
             child: buttonClicked
-                ? CircularProgressIndicator(
+                ? Container(
+                  width: 25.0,
+                  height: 25.0,
+                  child: CircularProgressIndicator(
                     valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
-                    strokeWidth: 3.0,
-                  )
+                    strokeWidth: 2.0,
+                  ),
+                )
                 : Text("Get Facts",
                     style: TextStyle(
                         fontSize: 16,
@@ -116,7 +123,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
             color: themeProvider.getTheme.primaryColor,
             textColor: Colors.white,
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0)),
+                borderRadius: BorderRadius.circular(8.0)),
             onPressed: () {
               setState(() {
                 buttonClicked = true;

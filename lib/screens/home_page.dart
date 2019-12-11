@@ -39,13 +39,18 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           UserAccountsDrawerHeader(
             accountName: Text(
-              "Numbers API",
+              "Random Facts",
               style: TextStyle(color: Colors.white),
             ),
-            accountEmail: Text("Made with \u{1F497} by AS Devs",
+            accountEmail: Text("Made with \u{1F499} by AS Devs",
                 style: TextStyle(color: Colors.white)),
-            decoration:
-                BoxDecoration(color: themeProvider.getTheme.primaryColor),
+            decoration: BoxDecoration(
+              color: themeProvider.getTheme.primaryColor,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(20.0),
+                bottomRight: Radius.circular(20.0),
+              ),
+            ),
           ),
           ListTile(
             title: Text("Home"),
