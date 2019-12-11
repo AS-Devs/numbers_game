@@ -7,6 +7,7 @@ import 'package:numbers_game/utils/shared_prefs.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   SharedPrefs.getThemeValue().then((themeInt) {
     //var themeInt = prefs.getInt("Theme") ?? 1;
     if (themeInt == ThemeType.light.index) {

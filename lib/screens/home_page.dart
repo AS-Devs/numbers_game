@@ -3,6 +3,7 @@ import 'package:numbers_game/providers/theme_provider.dart';
 import 'package:numbers_game/screens/about_page.dart';
 import 'package:numbers_game/screens/main_page.dart';
 import 'package:numbers_game/screens/settings_page.dart';
+import 'package:numbers_game/screens/splash_page.dart';
 import 'package:numbers_game/widgets/curved_appbar.dart';
 import 'package:provider/provider.dart';
 
@@ -26,7 +27,7 @@ class _HomePageState extends State<HomePage> {
         child: const CurvedAppBar(),
       ),
       drawer: buildDrawer(context),
-      body: activePage,
+      body: Splash(),
     ));
   }
 
