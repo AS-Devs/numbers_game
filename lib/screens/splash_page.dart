@@ -1,5 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:fluttie/fluttie.dart';
+import 'package:numbers_game/animations/page_route_transitions.dart';
+import 'package:numbers_game/providers/theme_provider.dart';
+import 'package:numbers_game/screens/home_page.dart';
+import 'package:provider/provider.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -14,6 +20,7 @@ class _SplashState extends State<Splash> {
   void initState() {
     super.initState();
     prepareAnimation();
+    startTimeout();
   }
 
   @override
@@ -24,10 +31,13 @@ class _SplashState extends State<Splash> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<DynamicTheme>(context);
     return Container(
+      color: themeProvider.getTheme.canvasColor,
       child: Center(
         child: ready
-            ? FluttieAnimation(emojiAnimation) // todo: Perform this animation in a seperate page and with animation completion navigate to main page
+            ? FluttieAnimation(
+                emojiAnimation) // todo: Perform this animation in a seperate page and with animation completion navigate to main page
             : Text("Loading Animation..."),
       ),
     );
@@ -55,5 +65,17 @@ class _SplashState extends State<Splash> {
         emojiAnimation.start();
       });
     }
+  }
+
+  startTimeout() async {
+    var duration = const Duration(seconds: 4);
+    return new Timer(duration, navigateToHomePage);
+  }
+
+  navigateToHomePage() {
+    // Navigator.of(context).pushAndRemoveUntil(
+    //     MaterialPageRoute(builder: (context) => HomePage()), (r) => false);
+    Navigator.of(context)
+        .pushAndRemoveUntil(ScaleRoute(page: HomePage()), (r) => false);
   }
 }

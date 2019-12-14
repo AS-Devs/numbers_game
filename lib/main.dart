@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:numbers_game/models/themes.dart';
 import 'package:numbers_game/providers/theme_provider.dart';
 import 'package:numbers_game/screens/home_page.dart';
+import 'package:numbers_game/screens/splash_page.dart';
 import 'package:numbers_game/utils/shared_prefs.dart';
 import 'package:provider/provider.dart';
 
@@ -50,7 +51,7 @@ class _NumbersGameState extends State<NumbersGame> {
     return MaterialApp(
       title: 'Numbers Game',
       theme: themeProvider.getTheme,
-      home: HomePage(),
+      home: Splash(),
     );
   }
 }

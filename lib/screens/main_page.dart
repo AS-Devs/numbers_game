@@ -36,36 +36,33 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         Center(
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: ToggleButtons(
-              children: <Widget>[
-                Text("Trivia"),
-                Text("Year"),
-                Text("Date"),
-                Text("Math")
-              ],
-              selectedColor: Colors.white,
-              fillColor: themeProvider.getTheme.primaryColor,
-              borderRadius: BorderRadius.circular(8.0),
-              borderColor: themeProvider.getTheme.primaryColor,
-              selectedBorderColor: themeProvider.getTheme.primaryColor,
-              isSelected: isSelectedFactTypes,
-              onPressed: (int index) {
-                setState(() {
-                  for (int buttonIndex = 0;
-                      buttonIndex < isSelectedFactTypes.length;
-                      buttonIndex++) {
-                    if (buttonIndex == index) {
-                      isSelectedFactTypes[buttonIndex] = true;
-                      _type = ApiType.values[index];
-                    } else {
-                      isSelectedFactTypes[buttonIndex] = false;
-                    }
+          child: ToggleButtons(
+            children: <Widget>[
+              Text("Trivia"),
+              Text("Year"),
+              Text("Date"),
+              Text("Math")
+            ],
+            selectedColor: Colors.white,
+            fillColor: themeProvider.getTheme.primaryColor,
+            borderRadius: BorderRadius.circular(8.0),
+            borderColor: themeProvider.getTheme.primaryColor,
+            selectedBorderColor: themeProvider.getTheme.primaryColor,
+            isSelected: isSelectedFactTypes,
+            onPressed: (int index) {
+              setState(() {
+                for (int buttonIndex = 0;
+                    buttonIndex < isSelectedFactTypes.length;
+                    buttonIndex++) {
+                  if (buttonIndex == index) {
+                    isSelectedFactTypes[buttonIndex] = true;
+                    _type = ApiType.values[index];
+                  } else {
+                    isSelectedFactTypes[buttonIndex] = false;
                   }
-                });
-              },
-            ),
+                }
+              });
+            },
           ),
         ),
         Center(
@@ -107,13 +104,14 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           child: RaisedButton(
             child: buttonClicked
                 ? Container(
-                  width: 25.0,
-                  height: 25.0,
-                  child: CircularProgressIndicator(
-                    valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
-                    strokeWidth: 2.0,
-                  ),
-                )
+                    width: 25.0,
+                    height: 25.0,
+                    child: CircularProgressIndicator(
+                      valueColor:
+                          new AlwaysStoppedAnimation<Color>(Colors.white),
+                      strokeWidth: 2.0,
+                    ),
+                  )
                 : Text("Get Facts",
                     style: TextStyle(
                         fontSize: 16,
@@ -140,7 +138,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   void _getFact() async {
     switch (_type) {
       case ApiType.trivia:
-        if (isSelectedNumberTypes[0]) {
+        if (isSelectedNumberTypes[0] || controller.text == "") {
           _showFact(context, getTriviaFact());
         } else {
           _showFact(context, getTriviaFact(number: controller.text));
@@ -161,7 +159,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
         }
         break;
       case ApiType.math:
-        if (isSelectedNumberTypes[0]) {
+        if (isSelectedNumberTypes[0] || controller.text == "") {
           _showFact(context, getMathFact());
         } else {
           _showFact(context, getMathFact(number: controller.text));
