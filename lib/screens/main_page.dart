@@ -37,13 +37,15 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
       children: <Widget>[
         Center(
           child: ToggleButtons(
+            constraints: BoxConstraints.expand(width: 80, height: 40),
             children: <Widget>[
-              Text("Trivia"),
-              Text("Year"),
-              Text("Date"),
-              Text("Math")
+              Text("Trivia", textScaleFactor: 1.1,),
+              Text("Year", textScaleFactor: 1.1,),
+              Text("Date", textScaleFactor: 1.1,),
+              Text("Math", textScaleFactor: 1.1,)
             ],
             selectedColor: Colors.white,
+            textStyle: TextStyle(fontWeight: FontWeight.w500),
             fillColor: themeProvider.getTheme.primaryColor,
             borderRadius: BorderRadius.circular(8.0),
             borderColor: themeProvider.getTheme.primaryColor,
@@ -67,11 +69,13 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
         ),
         Center(
           child: ToggleButtons(
+            constraints: BoxConstraints.expand(width: 80, height: 40),
             children: <Widget>[
               Text("Random"),
               Text("Choose"),
             ],
             selectedColor: Colors.white,
+            textStyle: TextStyle(fontWeight: FontWeight.w600),
             fillColor: themeProvider.getTheme.primaryColor,
             borderRadius: BorderRadius.circular(8.0),
             borderColor: themeProvider.getTheme.primaryColor,
@@ -107,15 +111,14 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                     width: 25.0,
                     height: 25.0,
                     child: CircularProgressIndicator(
-                      valueColor:
-                          new AlwaysStoppedAnimation<Color>(Colors.white),
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                       strokeWidth: 2.0,
                     ),
                   )
                 : Text("Get Facts",
                     style: TextStyle(
                         fontSize: 16,
-                        fontStyle: FontStyle.normal,
+                        fontStyle: FontStyle.italic,
                         fontWeight: FontWeight.bold,
                         letterSpacing: 0.4)),
             color: themeProvider.getTheme.primaryColor,
@@ -123,11 +126,28 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.0)),
             onPressed: () {
-              setState(() {
-                buttonClicked = true;
-                FocusScope.of(context).unfocus();
-              });
-              _getFact();
+              final snackBar = SnackBar(
+              content: Text('Choose a number first ...'),
+              duration: Duration(seconds: 3),
+              action: SnackBarAction(
+                label: 'OK',
+                textColor: Colors.white,
+                onPressed: () {
+                  this.setState(() {
+                    buttonClicked = false;
+                  });
+                },
+              ),
+              backgroundColor: themeProvider.getTheme.accentColor,);
+              if(!isSelectedNumberTypes[0] && !isSelectedFactTypes[1] && !isSelectedFactTypes[2] && controller.text == "") {
+                Scaffold.of(context).showSnackBar(snackBar);
+              }else {
+                setState(() {
+                  buttonClicked = true;
+                  FocusScope.of(context).unfocus();
+                });
+                _getFact();
+              }
             },
           ),
         ),
@@ -138,7 +158,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   void _getFact() async {
     switch (_type) {
       case ApiType.trivia:
-        if (isSelectedNumberTypes[0] || controller.text == "") {
+        if (isSelectedNumberTypes[0]) {
           _showFact(context, getTriviaFact());
         } else {
           _showFact(context, getTriviaFact(number: controller.text));
@@ -159,7 +179,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
         }
         break;
       case ApiType.math:
-        if (isSelectedNumberTypes[0] || controller.text == "") {
+        if (isSelectedNumberTypes[0]) {
           _showFact(context, getMathFact());
         } else {
           _showFact(context, getMathFact(number: controller.text));
@@ -183,6 +203,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               child: Opacity(
                 opacity: ani1.value,
                 child: AlertDialog(
+                  backgroundColor: Theme.of(context).cardColor,
                   shape: UnderlineInputBorder(
                       borderRadius: BorderRadius.circular(16.0)),
                   title: Text("Fact"),

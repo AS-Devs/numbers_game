@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
               "Random Facts",
               style: TextStyle(color: Colors.white),
             ),
-            accountEmail: Text("Made with \u{1F499} by AS Devs",
+            accountEmail: Text("Made with \u{1F498} by AS Devs",
                 style: TextStyle(color: Colors.white)),
             decoration: BoxDecoration(
               color: themeProvider.getTheme.primaryColor,
@@ -53,9 +53,9 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           ListTile(
-            title: Text("Home"),
-            leading: Icon(Icons.home),
-            trailing: Icon(Icons.arrow_forward),
+            title: Text("Random Facts", textScaleFactor: 1.1,),
+            leading: Icon(Icons.center_focus_strong, color: themeProvider.getTheme.iconTheme.color),
+            trailing: Icon(Icons.label_important, color: themeProvider.getTheme.iconTheme.color),
             onTap: () {
               setState(() {
                 _drawerItemSelected(0, themeProvider);
@@ -64,9 +64,9 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           ListTile(
-            title: Text("Settings"),
-            leading: Icon(Icons.settings),
-            trailing: Icon(Icons.arrow_forward),
+            title: Text("Themes", textScaleFactor: 1.1,),
+            leading: Icon(Icons.terrain, color: themeProvider.getTheme.iconTheme.color),
+            trailing: Icon(Icons.label_important, color: themeProvider.getTheme.iconTheme.color),
             onTap: () {
               setState(() {
                 _drawerItemSelected(1, themeProvider);
@@ -75,9 +75,9 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           ListTile(
-            title: Text("About"),
-            leading: Icon(Icons.info),
-            trailing: Icon(Icons.arrow_forward),
+            title: Text("About", textScaleFactor: 1.1,),
+            leading: Icon(Icons.info, color: themeProvider.getTheme.iconTheme.color),
+            trailing: Icon(Icons.label_important, color: themeProvider.getTheme.iconTheme.color),
             onTap: () {
               setState(() {
                 _drawerItemSelected(2, themeProvider);

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:numbers_game/models/themes.dart';
 import 'package:numbers_game/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
-import '../main.dart';
+import 'package:numbers_game/main.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key key}) : super(key: key);

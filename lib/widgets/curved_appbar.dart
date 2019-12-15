@@ -9,18 +9,19 @@ class CurvedAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: Text(
-        "Numbers Game",
-        style: TextStyle(color: Colors.white),
+        "Random Facts",
+        textScaleFactor: 1.08,
+        style: TextStyle(color: Colors.white, fontStyle: FontStyle.italic),
       ),
       iconTheme: new IconThemeData(color: Colors.white),
       centerTitle: true,
-      elevation: 8.0,
+      elevation: 6.0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(25.0),
             bottomRight: Radius.circular(25.0)),
       ),
-      brightness: Brightness.dark,
+      // brightness: Brightness.dark,
     );
   }
 }

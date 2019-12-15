@@ -1,16 +1,8 @@
-# numbers_game
+# Random Facts
 
-A new Flutter project.
+As a Developers at AS Developers, we wanted to try out the Flutter App. So Started this Project with no Future Goal, But Somehow in the mean time we love the platform and Framework, and build this trivia app just for fun.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Credits: 
+Numbers API : We build on this amazing open API. Shout out to them....
+http://numbersapi.com

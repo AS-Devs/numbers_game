@@ -36,9 +36,8 @@ class _SplashState extends State<Splash> {
       color: themeProvider.getTheme.canvasColor,
       child: Center(
         child: ready
-            ? FluttieAnimation(
-                emojiAnimation) // todo: Perform this animation in a seperate page and with animation completion navigate to main page
-            : Text("Loading Animation..."),
+            ? FluttieAnimation(emojiAnimation)// todo: Perform this animation in a seperate page and with animation completion navigate to main page
+            : Text("Loading Animation.." ,style: TextStyle(fontSize: 18),),
       ),
     );
   }
@@ -52,11 +51,11 @@ class _SplashState extends State<Splash> {
 
     var instance = Fluttie();
     var emojiComposition = await instance.loadAnimationFromAsset(
-      "assets/animations/welcome.json",
+      "assets/animations/splash.json",
     );
     emojiAnimation = await instance.prepareAnimation(emojiComposition,
-        duration: Duration(seconds: 2),
-        repeatCount: const RepeatCount.infinite(),
+        duration: Duration(milliseconds: 4500),
+        repeatCount: const RepeatCount.dontRepeat(),
         repeatMode: RepeatMode.START_OVER);
 
     if (mounted) {
