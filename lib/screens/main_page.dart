@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:numbers_game/models/fact.dart';
 import 'package:numbers_game/providers/theme_provider.dart';
+import 'package:numbers_game/utils/connectivity.dart';
 import 'package:numbers_game/webapis/services.dart';
 import 'package:provider/provider.dart';
 
@@ -39,10 +40,22 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           child: ToggleButtons(
             constraints: BoxConstraints.expand(width: 80, height: 40),
             children: <Widget>[
-              Text("Trivia", textScaleFactor: 1.1,),
-              Text("Year", textScaleFactor: 1.1,),
-              Text("Date", textScaleFactor: 1.1,),
-              Text("Math", textScaleFactor: 1.1,)
+              Text(
+                "Trivia",
+                textScaleFactor: 1.1,
+              ),
+              Text(
+                "Year",
+                textScaleFactor: 1.1,
+              ),
+              Text(
+                "Date",
+                textScaleFactor: 1.1,
+              ),
+              Text(
+                "Math",
+                textScaleFactor: 1.1,
+              )
             ],
             selectedColor: Colors.white,
             textStyle: TextStyle(fontWeight: FontWeight.w500),
@@ -127,21 +140,26 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                 borderRadius: BorderRadius.circular(8.0)),
             onPressed: () {
               final snackBar = SnackBar(
-              content: Text('Choose a number first ...'),
-              duration: Duration(seconds: 3),
-              action: SnackBarAction(
-                label: 'OK',
-                textColor: Colors.white,
-                onPressed: () {
-                  this.setState(() {
-                    buttonClicked = false;
-                  });
-                },
-              ),
-              backgroundColor: themeProvider.getTheme.accentColor,);
-              if(!isSelectedNumberTypes[0] && !isSelectedFactTypes[1] && !isSelectedFactTypes[2] && controller.text == "") {
+                content: Text('Choose a number first ...'),
+                duration: Duration(seconds: 3),
+                elevation: 5.0,
+                action: SnackBarAction(
+                  label: 'OK',
+                  textColor: Colors.white,
+                  onPressed: () {
+                    this.setState(() {
+                      buttonClicked = false;
+                    });
+                  },
+                ),
+                backgroundColor: themeProvider.getTheme.accentColor,
+              );
+              if (!isSelectedNumberTypes[0] &&
+                  !isSelectedFactTypes[1] &&
+                  !isSelectedFactTypes[2] &&
+                  controller.text == "") {
                 Scaffold.of(context).showSnackBar(snackBar);
-              }else {
+              } else {
                 setState(() {
                   buttonClicked = true;
                   FocusScope.of(context).unfocus();
@@ -156,37 +174,42 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   }
 
   void _getFact() async {
-    switch (_type) {
-      case ApiType.trivia:
-        if (isSelectedNumberTypes[0]) {
-          _showFact(context, getTriviaFact());
-        } else {
-          _showFact(context, getTriviaFact(number: controller.text));
-        }
-        break;
-      case ApiType.year:
-        if (isSelectedNumberTypes[0]) {
-          _showFact(context, getYearFact());
-        } else {
-          _showFact(context, getYearFact(year: year.join()));
-        }
-        break;
-      case ApiType.date:
-        if (isSelectedNumberTypes[0]) {
-          _showFact(context, getDateFact());
-        } else {
-          _showFact(context, getDateFact(date: _date.toString()));
-        }
-        break;
-      case ApiType.math:
-        if (isSelectedNumberTypes[0]) {
-          _showFact(context, getMathFact());
-        } else {
-          _showFact(context, getMathFact(number: controller.text));
-        }
-        break;
-      default:
-        break;
+    var isNetworkConnected = await NetworkConnectivity.isNetworkConnected();
+    if (isNetworkConnected) {
+      switch (_type) {
+        case ApiType.trivia:
+          if (isSelectedNumberTypes[0]) {
+            _showFact(context, getTriviaFact());
+          } else {
+            _showFact(context, getTriviaFact(number: controller.text));
+          }
+          break;
+        case ApiType.year:
+          if (isSelectedNumberTypes[0]) {
+            _showFact(context, getYearFact());
+          } else {
+            _showFact(context, getYearFact(year: year.join()));
+          }
+          break;
+        case ApiType.date:
+          if (isSelectedNumberTypes[0]) {
+            _showFact(context, getDateFact());
+          } else {
+            _showFact(context, getDateFact(date: _date.toString()));
+          }
+          break;
+        case ApiType.math:
+          if (isSelectedNumberTypes[0]) {
+            _showFact(context, getMathFact());
+          } else {
+            _showFact(context, getMathFact(number: controller.text));
+          }
+          break;
+        default:
+          break;
+      }
+    } else {
+      _showError('No Internet Connectivity');
     }
   }
 
@@ -228,6 +251,25 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           barrierLabel: '',
           context: context,
           pageBuilder: (context, animation1, animation2) {});
+    });
+  }
+
+  void _showError(String error) {
+    final snackBar = SnackBar(
+      content: Text(error),
+      elevation: 5.0,
+      backgroundColor: Theme.of(context).accentColor,
+      duration: Duration(seconds: 5),
+      action: SnackBarAction(
+        label: 'Ok',
+        textColor: Colors.white,
+        onPressed: () {},
+      ),
+    );
+
+    Scaffold.of(context).showSnackBar(snackBar);
+    setState(() {
+      buttonClicked = false;
     });
   }
 

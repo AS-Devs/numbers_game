@@ -30,6 +30,7 @@ dependencies:
   transparent_image: ^1.0.0
   numberpicker: ^1.1.0
   fluttie: ^0.5.0
+  connectivity: ^0.4.6+1
 
 dev_dependencies:
   flutter_test:
