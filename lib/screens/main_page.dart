@@ -179,30 +179,39 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
       switch (_type) {
         case ApiType.trivia:
           if (isSelectedNumberTypes[0]) {
-            _showFact(context, getTriviaFact());
+            //_showFact(context, getTriviaFact());
+            _showFactBottomSheet(context, getTriviaFact());
           } else {
-            _showFact(context, getTriviaFact(number: controller.text));
+            //_showFact(context, getTriviaFact(number: controller.text));
+            _showFactBottomSheet(
+                context, getTriviaFact(number: controller.text));
           }
           break;
         case ApiType.year:
           if (isSelectedNumberTypes[0]) {
-            _showFact(context, getYearFact());
+            //_showFact(context, getYearFact());
+            _showFactBottomSheet(context, getYearFact());
           } else {
-            _showFact(context, getYearFact(year: year.join()));
+            //_showFact(context, getYearFact(year: year.join()));
+            _showFactBottomSheet(context, getYearFact(year: year.join()));
           }
           break;
         case ApiType.date:
           if (isSelectedNumberTypes[0]) {
-            _showFact(context, getDateFact());
+            //_showFact(context, getDateFact());
+            _showFactBottomSheet(context, getDateFact());
           } else {
-            _showFact(context, getDateFact(date: _date.toString()));
+            //_showFact(context, getDateFact(date: _date.toString()));
+            _showFactBottomSheet(context, getDateFact(date: _date.toString()));
           }
           break;
         case ApiType.math:
           if (isSelectedNumberTypes[0]) {
-            _showFact(context, getMathFact());
+            //_showFact(context, getMathFact());
+            _showFactBottomSheet(context, getMathFact());
           } else {
-            _showFact(context, getMathFact(number: controller.text));
+            //_showFact(context, getMathFact(number: controller.text));
+            _showFactBottomSheet(context, getMathFact(number: controller.text));
           }
           break;
         default:
@@ -270,6 +279,45 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     Scaffold.of(context).showSnackBar(snackBar);
     setState(() {
       buttonClicked = false;
+    });
+  }
+
+  void _showFactBottomSheet(BuildContext context, Future<Fact> factFuture) {
+    factFuture.then((fact) {
+      setState(() {
+        buttonClicked = false;
+      });
+      showModalBottomSheet(
+          context: context,
+          elevation: 5.0,
+          backgroundColor: Theme.of(context).cardColor,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+          builder: (BuildContext bc) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    "Fact",
+                    style:
+                        TextStyle(fontSize: 50.0, fontWeight: FontWeight.w500),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    fact.text,
+                    style:
+                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.w300),
+                  ),
+                )
+              ],
+            );
+          });
     });
   }
 
