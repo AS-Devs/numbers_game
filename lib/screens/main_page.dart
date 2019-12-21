@@ -5,6 +5,7 @@ import 'package:numbers_game/providers/theme_provider.dart';
 import 'package:numbers_game/utils/connectivity.dart';
 import 'package:numbers_game/webapis/services.dart';
 import 'package:provider/provider.dart';
+import 'package:share/share.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key key}) : super(key: key);
@@ -21,8 +22,9 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   List<bool> isSelectedNumberTypes = [true, false];
   TextEditingController controller;
   int _date = 1;
-  List<int> year = [1, 0, 0, 0];
+  List<int> year = [0, 0, 0, 0];
   bool buttonClicked = false;
+  String factNumberText = "Fact";
 
   @override
   void initState() {
@@ -287,12 +289,24 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
       setState(() {
         buttonClicked = false;
       });
+      if (fact.type == 'date' && fact.date == "null") {
+        // int dayOfYear = int.parse(fact.number);
+        // DateTime dateTime = new DateTime(int.parse(fact.year), 1, 1)
+        //     .add(Duration(days: dayOfYear - 1));
+        // dateString = new DateFormat.yMMMMd().format(dateTime);
+        var dateArray = fact.text.split(" ");
+        factNumberText = "${dateArray[0]} ${dateArray[1]}, ${fact.year}";
+      } else {
+        factNumberText = fact.number;
+      }
       showModalBottomSheet(
           context: context,
           elevation: 5.0,
           backgroundColor: Theme.of(context).cardColor,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10.0),
+                  topRight: Radius.circular(10.0))),
           builder: (BuildContext bc) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -301,10 +315,26 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                    "Fact",
-                    style:
-                        TextStyle(fontSize: 50.0, fontWeight: FontWeight.w500),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        factNumberText,
+                        style: TextStyle(
+                            fontSize: 40.0, fontWeight: FontWeight.w500),
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.share),
+                        padding: EdgeInsets.zero,
+                        color: Theme.of(context).primaryColor,
+                        onPressed: () {
+                          Navigator.pop(context);
+                          Share.share("Check out this awesome fact: \n\n${fact.text}\nFor More: App Link!",
+                              subject:
+                                  'Awesome Fact by Random Fact App!');
+                        },
+                      )
+                    ],
                   ),
                 ),
                 Padding(

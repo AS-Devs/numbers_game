@@ -43,9 +43,10 @@ class _NumbersGameState extends State<NumbersGame> {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<DynamicTheme>(context);
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      systemNavigationBarColor: themeProvider.getTheme.canvasColor,
-    ));
+    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    //   systemNavigationBarColor: themeProvider.getTheme.canvasColor,
+    // ));
+    NumbersGame.setNavBarColor(themeProvider);
     return MaterialApp(
       title: 'Random Facts',
       theme: themeProvider.getTheme,
