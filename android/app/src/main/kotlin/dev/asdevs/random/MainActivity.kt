@@ -1,4 +1,4 @@
-package dev.asdevs.numbers_game
+package dev.asdevs.random
 
 import android.os.Bundle
 
