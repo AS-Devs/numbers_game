@@ -53,9 +53,14 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           ListTile(
-            title: Text("Random Facts", textScaleFactor: 1.1,),
-            leading: Icon(Icons.center_focus_strong, color: themeProvider.getTheme.iconTheme.color),
-            trailing: Icon(Icons.label_important, color: themeProvider.getTheme.iconTheme.color),
+            title: Text(
+              "Random Facts",
+              textScaleFactor: 1.1,
+            ),
+            leading: Icon(Icons.center_focus_strong,
+                color: themeProvider.getTheme.iconTheme.color),
+            trailing: Icon(Icons.label_important,
+                color: themeProvider.getTheme.iconTheme.color),
             onTap: () {
               setState(() {
                 _drawerItemSelected(0, themeProvider);
@@ -64,9 +69,14 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           ListTile(
-            title: Text("Themes", textScaleFactor: 1.1,),
-            leading: Icon(Icons.terrain, color: themeProvider.getTheme.iconTheme.color),
-            trailing: Icon(Icons.label_important, color: themeProvider.getTheme.iconTheme.color),
+            title: Text(
+              "Themes",
+              textScaleFactor: 1.1,
+            ),
+            leading: Icon(Icons.terrain,
+                color: themeProvider.getTheme.iconTheme.color),
+            trailing: Icon(Icons.label_important,
+                color: themeProvider.getTheme.iconTheme.color),
             onTap: () {
               setState(() {
                 _drawerItemSelected(1, themeProvider);
@@ -75,9 +85,14 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           ListTile(
-            title: Text("About", textScaleFactor: 1.1,),
-            leading: Icon(Icons.info, color: themeProvider.getTheme.iconTheme.color),
-            trailing: Icon(Icons.label_important, color: themeProvider.getTheme.iconTheme.color),
+            title: Text(
+              "About",
+              textScaleFactor: 1.1,
+            ),
+            leading:
+                Icon(Icons.info, color: themeProvider.getTheme.iconTheme.color),
+            trailing: Icon(Icons.label_important,
+                color: themeProvider.getTheme.iconTheme.color),
             onTap: () {
               setState(() {
                 _drawerItemSelected(2, themeProvider);
