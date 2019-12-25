@@ -60,7 +60,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               )
             ],
             selectedColor: Colors.white,
-            textStyle: TextStyle(fontWeight: FontWeight.w500),
+            textStyle: TextStyle(fontFamily: 'Muli'),
             fillColor: themeProvider.getTheme.primaryColor,
             borderRadius: BorderRadius.circular(8.0),
             borderColor: themeProvider.getTheme.primaryColor,
@@ -90,7 +90,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               Text("Choose"),
             ],
             selectedColor: Colors.white,
-            textStyle: TextStyle(fontWeight: FontWeight.w600),
+            textStyle: TextStyle(fontFamily: 'Muli'),
             fillColor: themeProvider.getTheme.primaryColor,
             borderRadius: BorderRadius.circular(8.0),
             borderColor: themeProvider.getTheme.primaryColor,
@@ -132,10 +132,10 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                   )
                 : Text("Get Facts",
                     style: TextStyle(
-                        fontSize: 16,
-                        fontStyle: FontStyle.italic,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 0.4)),
+                      fontSize: 16,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 0.4)),
             color: themeProvider.getTheme.primaryColor,
             textColor: Colors.white,
             shape: RoundedRectangleBorder(
@@ -305,8 +305,8 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           backgroundColor: Theme.of(context).cardColor,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10.0),
-                  topRight: Radius.circular(10.0))),
+                  topLeft: Radius.circular(20.0),
+                  topRight: Radius.circular(20.0))),
           builder: (BuildContext bc) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -318,10 +318,16 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text(
+                      Expanded(
+                        child: Text(
                         factNumberText,
                         style: TextStyle(
-                            fontSize: 40.0, fontWeight: FontWeight.w500),
+                          color: Theme.of(context).iconTheme.color,
+                          fontFamily: 'Muli',
+                          fontSize: 38.0, 
+                          fontWeight: FontWeight.w600
+                        ),
+                      ),
                       ),
                       IconButton(
                         icon: Icon(Icons.share),
@@ -329,7 +335,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                         color: Theme.of(context).primaryColor,
                         onPressed: () {
                           Navigator.pop(context);
-                          Share.share("Check out this awesome fact: \n\n${fact.text}\nFor More: App Link!",
+                          Share.share("Check out this awesome fact: \n\n${fact.text}\n\nFor More: App Link!",
                               subject:
                                   'Awesome Fact by Random Fact App!');
                         },
@@ -342,7 +348,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                   child: Text(
                     fact.text,
                     style:
-                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.w300),
+                      TextStyle(color: Theme.of(context).iconTheme.color, fontSize: 18.0, fontWeight: FontWeight.w400, letterSpacing: .5),
                   ),
                 )
               ],
@@ -362,6 +368,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           return Container(
             width: 200.0,
             child: TextField(
+              style: TextStyle(color: themeProvider.getTheme.iconTheme.color),
               decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -384,6 +391,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0)),
               keyboardType: TextInputType.number,
+              maxLength: 10,
               textInputAction: TextInputAction.done,
               textAlign: TextAlign.center,
               controller: controller,
