@@ -1,7 +1,7 @@
-name: Dart CI
+name: Random Facts CI
 
 on: [push]
-name: Build & Test
+
 jobs:
   build:
     name: Build
