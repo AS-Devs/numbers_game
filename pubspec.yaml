@@ -32,6 +32,7 @@ dependencies:
   fluttie: ^0.5.0
   connectivity: ^0.4.6+1
   share: ^0.6.3+5
+  google_fonts: ^0.2.0
   #intl: ^0.16.0
 
 dev_dependencies:
