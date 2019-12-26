@@ -40,7 +40,8 @@ class _HomePageState extends State<HomePage> {
           UserAccountsDrawerHeader(
             accountName: Text(
               "Random Facts",
-              style: TextStyle(color: Colors.white),
+              textScaleFactor: 1.2,
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
             ),
             accountEmail: Text("Made with \u{1F498} by AS Devs",
                 style: TextStyle(color: Colors.white)),
@@ -53,14 +54,9 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           ListTile(
-            title: Text(
-              "Random Facts",
-              textScaleFactor: 1.1,
-            ),
-            leading: Icon(Icons.center_focus_strong,
-                color: themeProvider.getTheme.iconTheme.color),
-            trailing: Icon(Icons.label_important,
-                color: themeProvider.getTheme.iconTheme.color),
+            title: Text("Random Facts", textScaleFactor: 1.1, style: TextStyle(color: themeProvider.getTheme.iconTheme.color, fontWeight: FontWeight.w600),),
+            leading: Icon(Icons.center_focus_strong, color: themeProvider.getTheme.iconTheme.color),
+            trailing: Icon(Icons.label_important, color: themeProvider.getTheme.iconTheme.color),
             onTap: () {
               setState(() {
                 _drawerItemSelected(0, themeProvider);
@@ -69,14 +65,9 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           ListTile(
-            title: Text(
-              "Themes",
-              textScaleFactor: 1.1,
-            ),
-            leading: Icon(Icons.terrain,
-                color: themeProvider.getTheme.iconTheme.color),
-            trailing: Icon(Icons.label_important,
-                color: themeProvider.getTheme.iconTheme.color),
+            title: Text("Themes", textScaleFactor: 1.1, style: TextStyle(color: themeProvider.getTheme.iconTheme.color,fontWeight: FontWeight.w600),),
+            leading: Icon(Icons.terrain, color: themeProvider.getTheme.iconTheme.color),
+            trailing: Icon(Icons.label_important, color: themeProvider.getTheme.iconTheme.color),
             onTap: () {
               setState(() {
                 _drawerItemSelected(1, themeProvider);
@@ -85,14 +76,9 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           ListTile(
-            title: Text(
-              "About",
-              textScaleFactor: 1.1,
-            ),
-            leading:
-                Icon(Icons.info, color: themeProvider.getTheme.iconTheme.color),
-            trailing: Icon(Icons.label_important,
-                color: themeProvider.getTheme.iconTheme.color),
+            title: Text("About", textScaleFactor: 1.1, style: TextStyle(color: themeProvider.getTheme.iconTheme.color,fontWeight: FontWeight.w600),),
+            leading: Icon(Icons.info, color: themeProvider.getTheme.iconTheme.color),
+            trailing: Icon(Icons.label_important, color: themeProvider.getTheme.iconTheme.color),
             onTap: () {
               setState(() {
                 _drawerItemSelected(2, themeProvider);
