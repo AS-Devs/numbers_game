@@ -26,12 +26,13 @@ dependencies:
   http: ^0.12.0+2
   shared_preferences: ^0.5.4+5
   provider: ^3.1.0+1
-  #url_launcher: ^5.2.5
-  transparent_image: ^1.0.0
+  url_launcher: ^5.2.5
+  #transparent_image: ^1.0.0
   numberpicker: ^1.1.0
   fluttie: ^0.5.0
   connectivity: ^0.4.6+1
   share: ^0.6.3+5
+  package_info: ^0.4.0+13
   google_fonts: ^0.2.0
   #intl: ^0.16.0
 
@@ -54,7 +55,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/animations/splash.json
-    #- images/a_dot_ham.jpeg
+    - assets/images/ayon.jpg
+    - assets/images/susanta.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
