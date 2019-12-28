@@ -50,18 +50,25 @@ class _AboutPageState extends State<AboutPage> {
             style: TextStyle(
                 fontSize: 30.0,
                 fontWeight: FontWeight.w500,
-                fontStyle: FontStyle.italic),
+                fontStyle: FontStyle.italic,
+                color: themeProvider.getTheme.iconTheme.color),
             textAlign: TextAlign.center,
           ),
           Text(
             "Version - $version",
-            style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w300),
+            style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.w300,
+                color: themeProvider.getTheme.indicatorColor),
             textAlign: TextAlign.center,
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(16.0, 32.0, 0.0, 16.0),
             child: Text("Team Members",
-                style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.w400)),
+                style: TextStyle(
+                    fontSize: 25.0,
+                    fontWeight: FontWeight.w400,
+                    color: themeProvider.getTheme.indicatorColor)),
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
@@ -96,7 +103,11 @@ class _AboutPageState extends State<AboutPage> {
                               ..onTap = () => launch("http://numbersapi.com/"))
                       ], style: TextStyle(fontSize: 16.0)),
                     ),
-                    Text("© 2019 AS Devs All Rights Reserved"),
+                    Text(
+                      "© ${DateTime.now().year} AS Devs All Rights Reserved",
+                      style: TextStyle(
+                          color: themeProvider.getTheme.indicatorColor),
+                    ),
                   ],
                 ),
               ),
