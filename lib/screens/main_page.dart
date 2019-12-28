@@ -132,10 +132,10 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                   )
                 : Text("Get Facts",
                     style: TextStyle(
-                      fontSize: 16,
-                      fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 0.4)),
+                        fontSize: 16,
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 0.4)),
             color: themeProvider.getTheme.primaryColor,
             textColor: Colors.white,
             shape: RoundedRectangleBorder(
@@ -320,14 +320,13 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                     children: <Widget>[
                       Expanded(
                         child: Text(
-                        factNumberText,
-                        style: TextStyle(
-                          color: Theme.of(context).iconTheme.color,
-                          fontFamily: 'Muli',
-                          fontSize: 38.0, 
-                          fontWeight: FontWeight.w600
+                          factNumberText,
+                          style: TextStyle(
+                              color: Theme.of(context).iconTheme.color,
+                              fontFamily: 'Muli',
+                              fontSize: 38.0,
+                              fontWeight: FontWeight.w600),
                         ),
-                      ),
                       ),
                       IconButton(
                         icon: Icon(Icons.share),
@@ -335,9 +334,9 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                         color: Theme.of(context).primaryColor,
                         onPressed: () {
                           Navigator.pop(context);
-                          Share.share("Check out this awesome fact: \n\n${fact.text}\n\nFor More: App Link!",
-                              subject:
-                                  'Awesome Fact by Random Fact App!');
+                          Share.share(
+                              "Check out this awesome fact: \n\n${fact.text}\n\nFor More: App Link!",
+                              subject: 'Awesome Fact by Random Fact App!');
                         },
                       )
                     ],
@@ -347,8 +346,11 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
                     fact.text,
-                    style:
-                      TextStyle(color: Theme.of(context).iconTheme.color, fontSize: 18.0, fontWeight: FontWeight.w400, letterSpacing: .5),
+                    style: TextStyle(
+                        color: Theme.of(context).iconTheme.color,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.w400,
+                        letterSpacing: .5),
                   ),
                 )
               ],
@@ -403,7 +405,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
             decoration: BoxDecoration(),
             initialValue: _date,
             minValue: 1,
-            maxValue: 31,
+            maxValue: 365,
             onChanged: (newValue) {
               setState(() {
                 _date = newValue;

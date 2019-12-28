@@ -18,7 +18,10 @@ class SettingsPage extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(16.0, 16.0, 0.0, 16.0),
           child: Text(
             "Theme",
-            style: TextStyle(fontSize: 35.0, fontWeight: FontWeight.w400),
+            style: TextStyle(
+                fontSize: 35.0,
+                fontWeight: FontWeight.w400,
+                color: themeProvider.getTheme.indicatorColor),
             textAlign: TextAlign.start,
           ),
         ),
