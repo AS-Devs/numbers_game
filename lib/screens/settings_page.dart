@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:numbers_game/models/themes.dart';
 import 'package:numbers_game/providers/theme_provider.dart';
@@ -56,6 +58,21 @@ class SettingsPage extends StatelessWidget {
                   elevation: 10.0,
                   child: Text(
                     "Dark",
+                    style: TextStyle(color: Colors.white),
+                  )),
+            ),
+            ButtonTheme(
+              minWidth: 100.0,
+              height: 100.0,
+              child: RaisedButton(
+                  onPressed: () {
+                    themeProvider.setTheme = gradientTheme;
+                    NumbersGame.setNavBarColor(themeProvider);
+                  },
+                  color: Color(0xFFf8a170),
+                  elevation: 10.0,
+                  child: Text(
+                    "Cream",
                     style: TextStyle(color: Colors.white),
                   )),
             )

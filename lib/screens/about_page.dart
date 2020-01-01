@@ -18,6 +18,7 @@ class _AboutPageState extends State<AboutPage> {
   double size = 10.0;
   static const String ayonImagePath = 'assets/images/ayon.jpg';
   static const String susantaImagePath = 'assets/images/susanta.jpg';
+  static const String appicon = 'assets/images/appicon.png';
 
   @override
   void initState() {
@@ -25,7 +26,7 @@ class _AboutPageState extends State<AboutPage> {
     PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
       setState(() {
         version = packageInfo.version;
-        size = 150.0;
+        size = 140.0;
       });
     });
   }
@@ -39,10 +40,12 @@ class _AboutPageState extends State<AboutPage> {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: FlutterLogo(
-              size: size,
+            child: AnimatedContainer(
+              child: Image.asset(appicon),
+              width: size,
+              height: size,
               duration: Duration(seconds: 2),
-              curve: Curves.bounceInOut,
+              curve: Curves.bounceInOut
             ),
           ),
           Text(
@@ -65,18 +68,19 @@ class _AboutPageState extends State<AboutPage> {
           Padding(
             padding: const EdgeInsets.fromLTRB(16.0, 32.0, 0.0, 16.0),
             child: Text("Team Members",
+                textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontSize: 25.0,
+                    fontSize: 22.0,
                     fontWeight: FontWeight.w400,
                     color: themeProvider.getTheme.indicatorColor)),
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 6.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const ProfileAvatar("Ayon Das", ayonImagePath),
-                const ProfileAvatar("Susanta Chakraborty", susantaImagePath)
+                Expanded(child: const ProfileAvatar("AyonAB", ayonImagePath),),
+                Expanded(child: const ProfileAvatar("susanta96", susantaImagePath),),
               ],
             ),
           ),
@@ -86,27 +90,36 @@ class _AboutPageState extends State<AboutPage> {
               child: Align(
                 alignment: FractionalOffset.bottomCenter,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
+                    Text("This app is developed and maintained by AS Devs",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w400,
+                          color: themeProvider.getTheme.indicatorColor),
+                    ),
                     RichText(
                       textAlign: TextAlign.center,
                       text: TextSpan(children: [
                         TextSpan(
                             text: "Powered by an awesome API called ",
                             style: TextStyle(
+                                fontSize: 14.0,
                                 color: themeProvider.getTheme.indicatorColor)),
                         TextSpan(
                             text: "Numbers API",
                             style: TextStyle(color: Colors.blue),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () => launch("http://numbersapi.com/"))
-                      ], style: TextStyle(fontSize: 16.0)),
+                      ], style: TextStyle(fontSize: 14.0)),
                     ),
                     Text(
-                      "© ${DateTime.now().year} AS Devs All Rights Reserved",
+                      "Copyright ©${DateTime.now().year} by AS Devs. All Rights Reserved.",
                       style: TextStyle(
-                          color: themeProvider.getTheme.indicatorColor),
+                        fontSize: 12.0,
+                        color: themeProvider.getTheme.indicatorColor),
                     ),
                   ],
                 ),
@@ -118,3 +131,4 @@ class _AboutPageState extends State<AboutPage> {
     );
   }
 }
+

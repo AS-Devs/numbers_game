@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:numbers_game/custom_icons/custom_icons.dart';
 
 class ProfileAvatar extends StatelessWidget {
@@ -13,19 +14,27 @@ class ProfileAvatar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          ClipOval(
-            child: Image.asset(
-              imagePath,
-              height: 120.0,
-              width: 120.0,
+          Container(
+            padding: EdgeInsets.all(10.0),
+            decoration: BoxDecoration(
+              border: Border.all(color: Theme.of(context).indicatorColor, width: 4),
+              borderRadius: BorderRadius.circular(100)
+            ),
+            child: ClipOval(
+              child: Image.asset(
+                imagePath,
+                height: 90.0,
+                width: 90.0,
+              ),
             ),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: Text(
               name,
-              textScaleFactor: 1.5,
-              style: TextStyle(color: Theme.of(context).indicatorColor),
+              textScaleFactor: 1.1,
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Theme.of(context).indicatorColor, fontSize: 16.0),
             ),
           ),
           Row(
