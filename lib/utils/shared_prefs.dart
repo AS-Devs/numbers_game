@@ -29,7 +29,9 @@ class SharedPrefs{
 
     if (theme == lightTheme) {
       prefs.setInt(theme_key, ThemeType.light.index);
-    } else if (theme == darkTheme) {
+    } else if (theme == gradientTheme) {
+      prefs.setInt(theme_key, ThemeType.light.index);
+    }else if (theme == darkTheme) {
       prefs.setInt(theme_key, ThemeType.dark.index);
     }
   }

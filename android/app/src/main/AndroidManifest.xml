@@ -9,8 +9,8 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="Random"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Random Facts"
+        android:icon="@mipmap/ic_launcher_foreground">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

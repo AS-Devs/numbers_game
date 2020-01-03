@@ -19,6 +19,11 @@ void main() {
         builder: (_) => DynamicTheme(darkTheme),
         child: NumbersGame(),
       ));
+    } else if (themeInt == ThemeType.light.index) {
+      runApp(ChangeNotifierProvider<DynamicTheme>(
+        builder: (_) => DynamicTheme(gradientTheme),
+        child: NumbersGame(),
+      ));
     } else {
       runApp(ChangeNotifierProvider<DynamicTheme>(
         builder: (_) => DynamicTheme(lightTheme),
@@ -43,9 +48,6 @@ class _NumbersGameState extends State<NumbersGame> {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<DynamicTheme>(context);
-    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    //   systemNavigationBarColor: themeProvider.getTheme.canvasColor,
-    // ));
     NumbersGame.setNavBarColor(themeProvider);
     return MaterialApp(
       title: 'Random Facts',
