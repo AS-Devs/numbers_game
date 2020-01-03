@@ -10,7 +10,7 @@ void main() {
   testWidgets('Theme Widget Test', (WidgetTester tester) async {
     final testKey = Key('T');
     await tester.pumpWidget(ChangeNotifierProvider<DynamicTheme>(
-      builder: (_) => DynamicTheme(lightTheme),
+      create: (_) => DynamicTheme(lightTheme),
       child: HomePage(key: testKey),
     ));
 

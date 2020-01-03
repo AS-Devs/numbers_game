@@ -12,17 +12,54 @@ class SettingsPage extends StatelessWidget {
     final themeProvider = Provider.of<DynamicTheme>(context);
     return Container(
         child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16.0, 16.0, 0.0, 16.0),
-          child: Text(
-            "Theme",
-            style: TextStyle(
-                fontSize: 35.0,
-                fontWeight: FontWeight.w400,
-                color: themeProvider.getTheme.indicatorColor),
-            textAlign: TextAlign.start,
+        Center(
+          child: AnimatedContainer(
+            duration: Duration(seconds: 1),
+            height: 300.0,
+            width: 180.0,
+            decoration: BoxDecoration(
+                color: themeProvider.getTheme.canvasColor,
+                border: Border.all(
+                    color: themeProvider.getTheme.primaryColor, width: 5),
+                borderRadius: BorderRadius.circular(25.0)),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                AnimatedDefaultTextStyle(
+                  duration: Duration(milliseconds: 500),
+                  child: Text("Theme"),
+                  style: TextStyle(
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.bold,
+                      color: themeProvider.getTheme.indicatorColor),
+                ),
+                AnimatedContainer(
+                    duration: Duration(milliseconds: 500),
+                    height: 90.0,
+                    width: 150.0,
+                    decoration: BoxDecoration(
+                        color: themeProvider.getTheme.accentColor,
+                        borderRadius: BorderRadius.circular(15.0))),
+                AnimatedContainer(
+                    duration: Duration(milliseconds: 500),
+                    height: 40.0,
+                    width: 150.0,
+                    decoration: BoxDecoration(
+                        color: Colors.blueGrey,
+                        borderRadius: BorderRadius.circular(15.0))),
+                AnimatedContainer(
+                    duration: Duration(milliseconds: 500),
+                    height: 60.0,
+                    width: 150.0,
+                    decoration: BoxDecoration(
+                        color: themeProvider.getTheme.primaryColor,
+                        borderRadius: BorderRadius.circular(15.0)))
+              ],
+            ),
           ),
         ),
         Row(
@@ -40,7 +77,8 @@ class SettingsPage extends StatelessWidget {
                 elevation: 10.0,
                 child: Text(
                   "Light",
-                  style: TextStyle(color: Colors.black),
+                  style: TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -56,11 +94,30 @@ class SettingsPage extends StatelessWidget {
                   elevation: 10.0,
                   child: Text(
                     "Dark",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
                   )),
             )
           ],
         ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 0.0),
+          child: ButtonTheme(
+            minWidth: 300.0,
+            height: 40.0,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)),
+            child: RaisedButton(
+                onPressed: () {},
+                color: themeProvider.getTheme.primaryColor,
+                elevation: 20.0,
+                child: Text(
+                  "Apply",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                )),
+          ),
+        )
       ],
     ));
   }

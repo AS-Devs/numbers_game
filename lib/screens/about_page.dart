@@ -19,6 +19,9 @@ class _AboutPageState extends State<AboutPage> {
   static const String ayonImagePath = 'assets/images/ayon.jpg';
   static const String susantaImagePath = 'assets/images/susanta.jpg';
 
+  static const List<String> ayonSocialLinks = ["https://github.com/AyonAB", "https://www.facebook.com/ayan.loves.alterbridge", "www.linkedin.com/in/das-ayonab"];
+  static const List<String> susantaSocialLinks = ["https://github.com/susanta96", "https://www.facebook.com/chakraboty.susanta", "https://www.linkedin.com/in/susanta96/"];
+
   @override
   void initState() {
     super.initState();
@@ -75,8 +78,8 @@ class _AboutPageState extends State<AboutPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                const ProfileAvatar("Ayon Das", ayonImagePath),
-                const ProfileAvatar("Susanta Chakraborty", susantaImagePath)
+                const ProfileAvatar("Ayon Das", ayonImagePath, ayonSocialLinks),
+                const ProfileAvatar("Susanta Chakraborty", susantaImagePath, susantaSocialLinks)
               ],
             ),
           ),
