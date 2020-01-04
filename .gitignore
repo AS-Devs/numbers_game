@@ -38,6 +38,7 @@
 **/android/gradlew.bat
 **/android/local.properties
 **/android/key.properties
+**/android/**/signatureKey.jks
 **/android/**/GeneratedPluginRegistrant.java
 
 # iOS/XCode related
