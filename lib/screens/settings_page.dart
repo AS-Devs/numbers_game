@@ -99,7 +99,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     themeProvider.setTheme = darkTheme;
                     NumbersGame.setNavBarColor(themeProvider);
                   },
-                  color: Colors.black38,
+                  color: themeProvider.getTheme == darkTheme ? themeProvider.getTheme.primaryColor: Colors.black,
                   elevation: 10.0,
                   child: Text(
                     "Dark",
