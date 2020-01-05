@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:numbers_game/models/themes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-enum ThemeType { none, light, dark }
+enum ThemeType { none, light, dark, cream }
 
-class SharedPrefs{
+class SharedPrefs {
   static const theme_key = "Theme";
   static SharedPreferences prefs;
 
@@ -29,9 +29,9 @@ class SharedPrefs{
 
     if (theme == lightTheme) {
       prefs.setInt(theme_key, ThemeType.light.index);
-    } else if (theme == gradientTheme) {
-      prefs.setInt(theme_key, ThemeType.light.index);
-    }else if (theme == darkTheme) {
+    } else if (theme == creamTheme) {
+      prefs.setInt(theme_key, ThemeType.cream.index);
+    } else if (theme == darkTheme) {
       prefs.setInt(theme_key, ThemeType.dark.index);
     }
   }

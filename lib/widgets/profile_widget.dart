@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:numbers_game/custom_icons/custom_icons.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfileAvatar extends StatelessWidget {
   final String name;
   final String imagePath;
-  const ProfileAvatar(this.name, this.imagePath);
+  final List<String> socialLinks;
+  const ProfileAvatar(this.name, this.imagePath, this.socialLinks);
 
   @override
   Widget build(BuildContext context) {
@@ -42,15 +44,15 @@ class ProfileAvatar extends StatelessWidget {
             children: <Widget>[
               IconButton(
                 icon: Icon(GithubIcon.github_circled),
-                onPressed: () {},
+                onPressed: () => launch(socialLinks[0]),
               ),
               IconButton(
                 icon: Icon(FacebookIcon.facebook_squared),
-                onPressed: () {},
+                onPressed: () => launch(socialLinks[1]),
               ),
               IconButton(
                 icon: Icon(LinkedInIcon.linkedin_squared),
-                onPressed: () {},
+                onPressed: () => launch(socialLinks[2]),
               )
             ],
           )

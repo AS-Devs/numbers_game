@@ -181,38 +181,30 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
       switch (_type) {
         case ApiType.trivia:
           if (isSelectedNumberTypes[0]) {
-            //_showFact(context, getTriviaFact());
             _showFactBottomSheet(context, getTriviaFact());
           } else {
-            //_showFact(context, getTriviaFact(number: controller.text));
             _showFactBottomSheet(
                 context, getTriviaFact(number: controller.text));
           }
           break;
         case ApiType.year:
           if (isSelectedNumberTypes[0]) {
-            //_showFact(context, getYearFact());
             _showFactBottomSheet(context, getYearFact());
           } else {
-            //_showFact(context, getYearFact(year: year.join()));
             _showFactBottomSheet(context, getYearFact(year: year.join()));
           }
           break;
         case ApiType.date:
           if (isSelectedNumberTypes[0]) {
-            //_showFact(context, getDateFact());
             _showFactBottomSheet(context, getDateFact());
           } else {
-            //_showFact(context, getDateFact(date: _date.toString()));
             _showFactBottomSheet(context, getDateFact(date: _date.toString()));
           }
           break;
         case ApiType.math:
           if (isSelectedNumberTypes[0]) {
-            //_showFact(context, getMathFact());
             _showFactBottomSheet(context, getMathFact());
           } else {
-            //_showFact(context, getMathFact(number: controller.text));
             _showFactBottomSheet(context, getMathFact(number: controller.text));
           }
           break;
@@ -222,47 +214,6 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     } else {
       _showError('No Internet Connectivity');
     }
-  }
-
-  void _showFact(BuildContext context, Future<Fact> factFuture) {
-    factFuture.then((fact) {
-      setState(() {
-        buttonClicked = false;
-      });
-      showGeneralDialog(
-          barrierColor: Colors.black38,
-          transitionBuilder: (context, ani1, ani2, widget) {
-            return Transform.scale(
-              scale: ani1.value,
-              child: Opacity(
-                opacity: ani1.value,
-                child: AlertDialog(
-                  backgroundColor: Theme.of(context).cardColor,
-                  shape: UnderlineInputBorder(
-                      borderRadius: BorderRadius.circular(16.0)),
-                  title: Text("Fact"),
-                  content: Text(fact.text),
-                  actions: <Widget>[
-                    FlatButton(
-                      child: Text(
-                        "OK",
-                        style: TextStyle(color: Theme.of(context).primaryColor),
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    )
-                  ],
-                ),
-              ),
-            );
-          },
-          transitionDuration: Duration(milliseconds: 500),
-          barrierDismissible: true,
-          barrierLabel: '',
-          context: context,
-          pageBuilder: (context, animation1, animation2) {});
-    });
   }
 
   void _showError(String error) {
@@ -302,6 +253,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
       showModalBottomSheet(
           context: context,
           elevation: 5.0,
+          isDismissible: false,
           backgroundColor: Theme.of(context).cardColor,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.only(

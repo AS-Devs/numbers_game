@@ -11,22 +11,22 @@ void main() {
   SharedPrefs.getThemeValue().then((themeInt) {
     if (themeInt == ThemeType.light.index) {
       runApp(ChangeNotifierProvider<DynamicTheme>(
-        builder: (_) => DynamicTheme(lightTheme),
+        create: (_) => DynamicTheme(lightTheme),
         child: NumbersGame(),
       ));
     } else if (themeInt == ThemeType.dark.index) {
       runApp(ChangeNotifierProvider<DynamicTheme>(
-        builder: (_) => DynamicTheme(darkTheme),
+        create: (_) => DynamicTheme(darkTheme),
         child: NumbersGame(),
       ));
-    } else if (themeInt == ThemeType.light.index) {
+    } else if (themeInt == ThemeType.cream.index) {
       runApp(ChangeNotifierProvider<DynamicTheme>(
-        builder: (_) => DynamicTheme(gradientTheme),
+        create: (_) => DynamicTheme(creamTheme),
         child: NumbersGame(),
       ));
     } else {
       runApp(ChangeNotifierProvider<DynamicTheme>(
-        builder: (_) => DynamicTheme(lightTheme),
+        create: (_) => DynamicTheme(lightTheme),
         child: NumbersGame(),
       ));
     }

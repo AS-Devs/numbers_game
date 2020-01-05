@@ -20,6 +20,17 @@ class _AboutPageState extends State<AboutPage> {
   static const String susantaImagePath = 'assets/images/susanta.jpg';
   static const String appicon = 'assets/images/appicon.png';
 
+  static const List<String> ayonSocialLinks = [
+    "https://github.com/AyonAB",
+    "https://www.facebook.com/ayan.loves.alterbridge",
+    "www.linkedin.com/in/das-ayonab"
+  ];
+  static const List<String> susantaSocialLinks = [
+    "https://github.com/susanta96",
+    "https://www.facebook.com/chakraboty.susanta",
+    "https://www.linkedin.com/in/susanta96/"
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -41,12 +52,11 @@ class _AboutPageState extends State<AboutPage> {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: AnimatedContainer(
-              child: Image.asset(appicon),
-              width: size,
-              height: size,
-              duration: Duration(seconds: 2),
-              curve: Curves.bounceInOut
-            ),
+                child: Image.asset(appicon),
+                width: size,
+                height: size,
+                duration: Duration(seconds: 2),
+                curve: Curves.bounceInOut),
           ),
           Text(
             "Random Facts",
@@ -75,12 +85,19 @@ class _AboutPageState extends State<AboutPage> {
                     color: themeProvider.getTheme.indicatorColor)),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 6.0),
+            padding:
+                const EdgeInsets.symmetric(vertical: 16.0, horizontal: 6.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Expanded(child: const ProfileAvatar("AyonAB", ayonImagePath),),
-                Expanded(child: const ProfileAvatar("susanta96", susantaImagePath),),
+                Expanded(
+                  child: const ProfileAvatar(
+                      "AyonAB", ayonImagePath, ayonSocialLinks),
+                ),
+                Expanded(
+                  child: const ProfileAvatar(
+                      "susanta96", susantaImagePath, susantaSocialLinks),
+                ),
               ],
             ),
           ),
@@ -93,7 +110,8 @@ class _AboutPageState extends State<AboutPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
-                    Text("This app is developed and maintained by AS Devs",
+                    Text(
+                      "This app is developed and maintained by AS Devs",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 14.0,
@@ -118,8 +136,8 @@ class _AboutPageState extends State<AboutPage> {
                     Text(
                       "Copyright ©${DateTime.now().year} by AS Devs. All Rights Reserved.",
                       style: TextStyle(
-                        fontSize: 12.0,
-                        color: themeProvider.getTheme.indicatorColor),
+                          fontSize: 12.0,
+                          color: themeProvider.getTheme.indicatorColor),
                     ),
                   ],
                 ),
@@ -131,4 +149,3 @@ class _AboutPageState extends State<AboutPage> {
     );
   }
 }
-
