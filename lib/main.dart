@@ -19,9 +19,9 @@ void main() {
         create: (_) => DynamicTheme(darkTheme),
         child: NumbersGame(),
       ));
-    } else if (themeInt == ThemeType.light.index) {
+    } else if (themeInt == ThemeType.cream.index) {
       runApp(ChangeNotifierProvider<DynamicTheme>(
-        create: (_) => DynamicTheme(gradientTheme),
+        create: (_) => DynamicTheme(creamTheme),
         child: NumbersGame(),
       ));
     } else {

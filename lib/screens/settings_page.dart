@@ -6,8 +6,14 @@ import 'package:numbers_game/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:numbers_game/main.dart';
 
-class SettingsPage extends StatelessWidget {
+class SettingsPage extends StatefulWidget {
   const SettingsPage({Key key}) : super(key: key);
+
+  @override
+  _SettingsPageState createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +30,7 @@ class SettingsPage extends StatelessWidget {
             width: 180.0,
             decoration: BoxDecoration(
                 color: themeProvider.getTheme.canvasColor,
-                border: Border.all(
-                    color: themeProvider.getTheme.primaryColor, width: 5),
+                border: Border.all(color: themeProvider.getTheme.primaryColor, width: 5),
                 borderRadius: BorderRadius.circular(25.0)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -70,12 +75,13 @@ class SettingsPage extends StatelessWidget {
             ButtonTheme(
               minWidth: 100.0,
               height: 100.0,
+              shape: CircleBorder(),
               child: RaisedButton(
                 onPressed: () {
                   themeProvider.setTheme = lightTheme;
                   NumbersGame.setNavBarColor(themeProvider);
                 },
-                color: Colors.grey[200],
+                color: Colors.grey[300],
                 elevation: 10.0,
                 child: Text(
                   "Light",
@@ -87,12 +93,13 @@ class SettingsPage extends StatelessWidget {
             ButtonTheme(
               minWidth: 100.0,
               height: 100.0,
+              shape: CircleBorder(),
               child: RaisedButton(
                   onPressed: () {
                     themeProvider.setTheme = darkTheme;
                     NumbersGame.setNavBarColor(themeProvider);
                   },
-                  color: Colors.black45,
+                  color: Colors.black38,
                   elevation: 10.0,
                   child: Text(
                     "Dark",
@@ -103,38 +110,22 @@ class SettingsPage extends StatelessWidget {
             ButtonTheme(
               minWidth: 100.0,
               height: 100.0,
+              shape: CircleBorder(),
               child: RaisedButton(
                   onPressed: () {
-                    themeProvider.setTheme = gradientTheme;
+                    themeProvider.setTheme = creamTheme;
                     NumbersGame.setNavBarColor(themeProvider);
                   },
                   color: Color(0xFFf8a170),
                   elevation: 10.0,
                   child: Text(
                     "Cream",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
                   )),
-            )
+            ),
           ],
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 0.0),
-          child: ButtonTheme(
-            minWidth: 300.0,
-            height: 40.0,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0)),
-            child: RaisedButton(
-                onPressed: () {},
-                color: themeProvider.getTheme.primaryColor,
-                elevation: 20.0,
-                child: Text(
-                  "Apply",
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
-                )),
-          ),
-        )
       ],
     ));
   }
