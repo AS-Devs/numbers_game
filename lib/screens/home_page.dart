@@ -4,6 +4,7 @@ import 'package:numbers_game/screens/about_page.dart';
 import 'package:numbers_game/screens/main_page.dart';
 import 'package:numbers_game/screens/settings_page.dart';
 import 'package:numbers_game/widgets/curved_appbar.dart';
+import 'package:numbers_game/widgets/fact_page_views.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -41,7 +42,8 @@ class _HomePageState extends State<HomePage> {
             accountName: Text(
               "Random Facts",
               textScaleFactor: 1.2,
-              style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
             ),
             accountEmail: Text("Made with \u{1F498} by AS Devs",
                 style: TextStyle(color: Colors.white)),
@@ -54,9 +56,17 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           ListTile(
-            title: Text("Random Facts", textScaleFactor: 1.1, style: TextStyle(color: themeProvider.getTheme.iconTheme.color, fontWeight: FontWeight.w600),),
-            leading: Icon(Icons.center_focus_strong, color: themeProvider.getTheme.iconTheme.color),
-            trailing: Icon(Icons.label_important, color: themeProvider.getTheme.iconTheme.color),
+            title: Text(
+              "Random Facts",
+              textScaleFactor: 1.1,
+              style: TextStyle(
+                  color: themeProvider.getTheme.iconTheme.color,
+                  fontWeight: FontWeight.w600),
+            ),
+            leading: Icon(Icons.center_focus_strong,
+                color: themeProvider.getTheme.iconTheme.color),
+            trailing: Icon(Icons.label_important,
+                color: themeProvider.getTheme.iconTheme.color),
             onTap: () {
               setState(() {
                 _drawerItemSelected(0, themeProvider);
@@ -65,9 +75,17 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           ListTile(
-            title: Text("Themes", textScaleFactor: 1.1, style: TextStyle(color: themeProvider.getTheme.iconTheme.color,fontWeight: FontWeight.w600),),
-            leading: Icon(Icons.terrain, color: themeProvider.getTheme.iconTheme.color),
-            trailing: Icon(Icons.label_important, color: themeProvider.getTheme.iconTheme.color),
+            title: Text(
+              "Themes",
+              textScaleFactor: 1.1,
+              style: TextStyle(
+                  color: themeProvider.getTheme.iconTheme.color,
+                  fontWeight: FontWeight.w600),
+            ),
+            leading: Icon(Icons.terrain,
+                color: themeProvider.getTheme.iconTheme.color),
+            trailing: Icon(Icons.label_important,
+                color: themeProvider.getTheme.iconTheme.color),
             onTap: () {
               setState(() {
                 _drawerItemSelected(1, themeProvider);
@@ -76,9 +94,17 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           ListTile(
-            title: Text("About", textScaleFactor: 1.1, style: TextStyle(color: themeProvider.getTheme.iconTheme.color,fontWeight: FontWeight.w600),),
-            leading: Icon(Icons.info, color: themeProvider.getTheme.iconTheme.color),
-            trailing: Icon(Icons.label_important, color: themeProvider.getTheme.iconTheme.color),
+            title: Text(
+              "About",
+              textScaleFactor: 1.1,
+              style: TextStyle(
+                  color: themeProvider.getTheme.iconTheme.color,
+                  fontWeight: FontWeight.w600),
+            ),
+            leading:
+                Icon(Icons.info, color: themeProvider.getTheme.iconTheme.color),
+            trailing: Icon(Icons.label_important,
+                color: themeProvider.getTheme.iconTheme.color),
             onTap: () {
               setState(() {
                 _drawerItemSelected(2, themeProvider);
@@ -94,7 +120,8 @@ class _HomePageState extends State<HomePage> {
   _drawerItemSelected(int index, DynamicTheme themeProvider) {
     switch (index) {
       case 0:
-        activePage = const MainPage();
+        //activePage = const MainPage();
+        activePage = FactPageView();
         break;
       case 1:
         activePage = const SettingsPage();
