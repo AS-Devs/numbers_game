@@ -23,7 +23,7 @@ class _AboutPageState extends State<AboutPage> {
   static const List<String> ayonSocialLinks = [
     "https://github.com/AyonAB",
     "https://www.facebook.com/ayan.loves.alterbridge",
-    "www.linkedin.com/in/das-ayonab"
+    "https://www.linkedin.com/in/das-ayonab"
   ];
   static const List<String> susantaSocialLinks = [
     "https://github.com/susanta96",
@@ -75,15 +75,15 @@ class _AboutPageState extends State<AboutPage> {
                 color: themeProvider.getTheme.indicatorColor),
             textAlign: TextAlign.center,
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16.0, 32.0, 0.0, 16.0),
-            child: Text("Team Members",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 22.0,
-                    fontWeight: FontWeight.w400,
-                    color: themeProvider.getTheme.indicatorColor)),
+          SizedBox(
+            height: 34,
           ),
+          Text("Team Members",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 22.0,
+                  fontWeight: FontWeight.w400,
+                  color: themeProvider.getTheme.indicatorColor)),
           Padding(
             padding:
                 const EdgeInsets.symmetric(vertical: 16.0, horizontal: 6.0),

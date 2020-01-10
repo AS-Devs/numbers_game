@@ -36,8 +36,8 @@ final ThemeData creamTheme = ThemeData(
     iconTheme: IconThemeData(
       color: Color(0xFF616167),
     ),
-    scaffoldBackgroundColor: Color(0xFFF5F5F5),
-    canvasColor: Color(0xFFF5F5F5),
+    scaffoldBackgroundColor: Color(0xFFDEDEDE),
+    canvasColor: Color(0xFFDEDEDE),
     primaryColor: Color(0xFFf8a170),
     accentColor: Color(0xFF616167),
     appBarTheme: AppBarTheme(
