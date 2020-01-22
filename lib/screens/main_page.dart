@@ -235,7 +235,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     });
   }
 
-  void _showFactBottomSheet(BuildContext context, Future<Fact> factFuture) {
+  void _showFactBottomSheet(BuildContext context, Future<NumberFact> factFuture) {
     factFuture.then((fact) {
       setState(() {
         buttonClicked = false;

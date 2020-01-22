@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:numbers_game/providers/theme_provider.dart';
 import 'package:numbers_game/screens/about_page.dart';
-import 'package:numbers_game/screens/main_page.dart';
+//import 'package:numbers_game/screens/main_page.dart';
 import 'package:numbers_game/screens/settings_page.dart';
 import 'package:numbers_game/widgets/curved_appbar.dart';
 import 'package:numbers_game/widgets/fact_page_views.dart';
@@ -15,7 +15,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Widget activePage = const MainPage();
+  Widget activePage = FactPageView();
 
   @override
   Widget build(BuildContext context) {

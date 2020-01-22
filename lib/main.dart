@@ -49,6 +49,7 @@ class _NumbersGameState extends State<NumbersGame> {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<DynamicTheme>(context);
     NumbersGame.setNavBarColor(themeProvider);
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return MaterialApp(
       title: 'Random Facts',
       theme: themeProvider.getTheme,

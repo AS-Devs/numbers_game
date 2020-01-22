@@ -66,10 +66,14 @@ android {
             //signingConfig signingConfigs.debug
             signingConfig signingConfigs.release
 
-//             minifyEnabled true
-//             useProguard true
+            // minifyEnabled true
+            // useProguard true
 
-//             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            // proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            applicationIdSuffix ".debug"
+            debuggable true
         }
     }
 }

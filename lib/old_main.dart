@@ -22,7 +22,7 @@ class FisrtScreen extends StatefulWidget {
 }
 
 class _FisrtScreenState extends State<FisrtScreen> {
-  Future<Fact> factFuture;
+  Future<NumberFact> factFuture;
   TextEditingController controller;
 
   @override
@@ -65,11 +65,11 @@ class _FisrtScreenState extends State<FisrtScreen> {
                       textAlign: TextAlign.start,
                       controller: controller,
                     ),
-                    FutureBuilder<Fact>(
+                    FutureBuilder<NumberFact>(
                       future: factFuture,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          Fact fact = snapshot.data;
+                          NumberFact fact = snapshot.data;
                           if (snapshot.connectionState ==
                               ConnectionState.done) {
                             return ListTile(

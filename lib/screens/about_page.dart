@@ -23,7 +23,7 @@ class _AboutPageState extends State<AboutPage> {
   static const List<String> ayonSocialLinks = [
     "https://github.com/AyonAB",
     "https://www.facebook.com/ayan.loves.alterbridge",
-    "www.linkedin.com/in/das-ayonab"
+    "https://www.linkedin.com/in/das-ayonab"
   ];
   static const List<String> susantaSocialLinks = [
     "https://github.com/susanta96",
