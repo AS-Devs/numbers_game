@@ -76,6 +76,25 @@ class _HomePageState extends State<HomePage> {
           ),
           ListTile(
             title: Text(
+              "Favorites",
+              textScaleFactor: 1.1,
+              style: TextStyle(
+                  color: themeProvider.getTheme.iconTheme.color,
+                  fontWeight: FontWeight.w600),
+            ),
+            leading: Icon(Icons.collections_bookmark,
+                color: themeProvider.getTheme.iconTheme.color),
+            trailing: Icon(Icons.label_important,
+                color: themeProvider.getTheme.iconTheme.color),
+            onTap: () {
+              setState(() {
+                _drawerItemSelected(1, themeProvider);
+              });
+              Navigator.of(context).pop();
+            },
+          ),
+          ListTile(
+            title: Text(
               "Themes",
               textScaleFactor: 1.1,
               style: TextStyle(
@@ -88,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                 color: themeProvider.getTheme.iconTheme.color),
             onTap: () {
               setState(() {
-                _drawerItemSelected(1, themeProvider);
+                _drawerItemSelected(2, themeProvider);
               });
               Navigator.of(context).pop();
             },
@@ -107,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                 color: themeProvider.getTheme.iconTheme.color),
             onTap: () {
               setState(() {
-                _drawerItemSelected(2, themeProvider);
+                _drawerItemSelected(3, themeProvider);
               });
               Navigator.of(context).pop();
             },
@@ -124,9 +143,11 @@ class _HomePageState extends State<HomePage> {
         activePage = FactPageView();
         break;
       case 1:
-        activePage = const SettingsPage();
         break;
       case 2:
+        activePage = const SettingsPage();
+        break;
+      case 3:
         activePage = const AboutPage();
         break;
       default:

@@ -1,3 +1,4 @@
+import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:numbers_game/models/fact.dart';
 import 'package:numbers_game/providers/theme_provider.dart';
@@ -34,165 +35,72 @@ class _FactPageViewState extends State<FactPageView>
         Container(
           color: Colors.transparent,
           child: Card(
-              color: themeProvider.getTheme.cardColor,
+              color: Colors.deepOrangeAccent,
               elevation: 8,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),
               ),
               margin: EdgeInsets.symmetric(vertical: 80.0, horizontal: 10.0),
-              child: Align(
-                alignment: Alignment.bottomLeft,
-                child: Container(
-                  height: 70,
-                  decoration: BoxDecoration(
-                      color: themeProvider.getTheme.primaryColor,
-                      borderRadius: BorderRadius.circular(30.0)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(left: 16.0),
-                        child: Text(
-                          "Number Facts",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 24),
-                        ),
-                      ),
-                      isNumberFactLoading
-                          ? Padding(
-                              padding: const EdgeInsets.only(right: 16.0),
-                              child: CircularProgressIndicator(
-                                valueColor:
-                                    AlwaysStoppedAnimation<Color>(Colors.white),
-                              ),
-                            )
-                          : IconButton(
-                              icon: Icon(Icons.refresh),
-                              color: Colors.white,
-                              iconSize: 32.0,
-                              onPressed: () {
-                                if (isGeneralFactLoading || isCatFactLoading)
-                                  return;
-                                setState(() {
-                                  isNumberFactLoading = true;
-                                });
-                              },
-                            )
-                    ],
-                  ),
+              child: InkWell(
+                borderRadius: BorderRadius.circular(30.0),
+                child: Center(
+                  child: Text("Number Facts"),
+                ),
+                onTap: () {},
+              )),
+        ),
+        Container(
+          color: Colors.transparent,
+          child: Card(
+              color: Colors.purpleAccent,
+              elevation: 8,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+              margin: EdgeInsets.symmetric(vertical: 80.0, horizontal: 10.0),
+              child: InkWell(
+                borderRadius: BorderRadius.circular(30.0),
+                onTap: () {
+                  if (isNumberFactLoading || isCatFactLoading) return;
+                  setState(() {
+                    isGeneralFactLoading = true;
+                  });
+                  _getFact(context);
+                },
+                child: Center(
+                  child: isGeneralFactLoading
+                      ? CircularProgressIndicator(
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Colors.white),
+                        )
+                      : Text("General Facts"),
                 ),
               )),
         ),
         Container(
           color: Colors.transparent,
           child: Card(
-            color: Colors.purpleAccent,
+            color: Colors.amberAccent,
             elevation: 8,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
             ),
             margin: EdgeInsets.symmetric(vertical: 80.0, horizontal: 10.0),
-            child: Align(
-              alignment: Alignment.bottomLeft,
-              child: Container(
-                height: 70,
-                decoration: BoxDecoration(
-                    color: themeProvider.getTheme.primaryColor,
-                    borderRadius: BorderRadius.circular(30.0)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16.0),
-                      child: Text(
-                        "General Facts",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24),
-                      ),
-                    ),
-                    isGeneralFactLoading
-                        ? Padding(
-                            padding: const EdgeInsets.only(right: 16.0),
-                            child: CircularProgressIndicator(
-                              valueColor:
-                                  AlwaysStoppedAnimation<Color>(Colors.white),
-                            ),
-                          )
-                        : IconButton(
-                            icon: Icon(Icons.refresh),
-                            color: Colors.white,
-                            iconSize: 32.0,
-                            onPressed: () {
-                              if (isNumberFactLoading || isCatFactLoading)
-                                return;
-                              setState(() {
-                                isGeneralFactLoading = true;
-                              });
-                              _getFact(context);
-                            },
-                          )
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-        Container(
-          color: Colors.transparent,
-          child: Card(
-            color: Colors.pink,
-            elevation: 8,
-            shape: RoundedRectangleBorder(
+            child: InkWell(
               borderRadius: BorderRadius.circular(30.0),
-            ),
-            margin: EdgeInsets.symmetric(vertical: 80.0, horizontal: 10.0),
-            child: Align(
-              alignment: Alignment.bottomLeft,
-              child: Container(
-                height: 70,
-                decoration: BoxDecoration(
-                    color: themeProvider.getTheme.primaryColor,
-                    borderRadius: BorderRadius.circular(30.0)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16.0),
-                      child: Text(
-                        "Cat Facts",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24),
-                      ),
-                    ),
-                    isCatFactLoading
-                        ? Padding(
-                            padding: const EdgeInsets.only(right: 16.0),
-                            child: CircularProgressIndicator(
-                              valueColor:
-                                  AlwaysStoppedAnimation<Color>(Colors.white),
-                            ),
-                          )
-                        : IconButton(
-                            icon: Icon(Icons.refresh),
-                            color: Colors.white,
-                            iconSize: 32.0,
-                            onPressed: () {
-                              setState(() {
-                                if (isNumberFactLoading || isGeneralFactLoading)
-                                  return;
-                                isCatFactLoading = true;
-                              });
-                              _getFact(context);
-                            },
-                          )
-                  ],
-                ),
+              onTap: () {
+                if (isNumberFactLoading || isGeneralFactLoading) return;
+                setState(() {
+                  isCatFactLoading = true;
+                });
+                _getFact(context);
+              },
+              child: Center(
+                child: isCatFactLoading
+                    ? CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      )
+                    : Text("Cat Facts"),
               ),
             ),
           ),

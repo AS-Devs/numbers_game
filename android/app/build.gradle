@@ -58,6 +58,9 @@ android {
             storeFile file(keystoreProperties['storeFile'])
             storePassword keystoreProperties['storePassword']
         }
+        debug{
+            
+        }
     }
 
     buildTypes {
@@ -72,6 +75,7 @@ android {
             // proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
+            signingConfig signingConfigs.debug
             applicationIdSuffix ".debug"
             debuggable true
         }
