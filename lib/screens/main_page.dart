@@ -253,7 +253,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
       showModalBottomSheet(
           context: context,
           elevation: 5.0,
-          isDismissible: false,
+          isDismissible: true,
           backgroundColor: Theme.of(context).cardColor,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
@@ -287,7 +287,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                         onPressed: () {
                           Navigator.pop(context);
                           Share.share(
-                              "Check out this awesome fact: \n\n${fact.text}\n\nFor More: App Link!",
+                              "Check out this awesome fact: \n\n${fact.text}\n\nFor More: https://play.google.com/store/apps/details?id=dev.asdevs.random",
                               subject: 'Awesome Fact by Random Fact App!');
                         },
                       )
