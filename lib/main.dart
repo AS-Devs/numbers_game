@@ -46,6 +46,15 @@ class NumbersGame extends StatefulWidget {
 
 class _NumbersGameState extends State<NumbersGame> {
   @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+  }
+
+  @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<DynamicTheme>(context);
     NumbersGame.setNavBarColor(themeProvider);

@@ -16,6 +16,7 @@ class AboutPage extends StatefulWidget {
 class _AboutPageState extends State<AboutPage> {
   String version;
   double size = 10.0;
+  Size screenSize;
   static const String ayonImagePath = 'assets/images/ayon.jpg';
   static const String susantaImagePath = 'assets/images/susanta.jpg';
   static const String appicon = 'assets/images/appicon.png';
@@ -34,10 +35,17 @@ class _AboutPageState extends State<AboutPage> {
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    screenSize = MediaQuery.of(context).size;
     PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
       setState(() {
         version = packageInfo.version;
-        size = 140.0;
+        //size = 140.0;
+        size = screenSize.height * 0.21;
       });
     });
   }
@@ -50,7 +58,7 @@ class _AboutPageState extends State<AboutPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(10.0),
             child: AnimatedContainer(
                 child: Image.asset(appicon),
                 width: size,
@@ -76,7 +84,7 @@ class _AboutPageState extends State<AboutPage> {
             textAlign: TextAlign.center,
           ),
           SizedBox(
-            height: 34,
+            height: screenSize.height * 0.03,
           ),
           Text("Team Members",
               textAlign: TextAlign.center,
@@ -108,7 +116,7 @@ class _AboutPageState extends State<AboutPage> {
                 alignment: FractionalOffset.bottomCenter,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  mainAxisSize: MainAxisSize.max,
+                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     Text(
                       "This app is developed and maintained by AS Devs",

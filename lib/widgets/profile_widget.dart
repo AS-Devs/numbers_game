@@ -11,13 +11,14 @@ class ProfileAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Container(
-            padding: EdgeInsets.all(10.0),
+            padding: EdgeInsets.all(7.0),
             decoration: BoxDecoration(
               border: Border.all(color: Theme.of(context).indicatorColor, width: 4),
               borderRadius: BorderRadius.circular(100)
@@ -25,8 +26,8 @@ class ProfileAvatar extends StatelessWidget {
             child: ClipOval(
               child: Image.asset(
                 imagePath,
-                height: 90.0,
-                width: 90.0,
+                height: screenSize.height * 0.12,
+                width: screenSize.height * 0.12,
               ),
             ),
           ),
@@ -34,7 +35,7 @@ class ProfileAvatar extends StatelessWidget {
             padding: const EdgeInsets.only(top: 8.0),
             child: Text(
               name,
-              textScaleFactor: 1.1,
+              textScaleFactor: 1.2,
               textAlign: TextAlign.center,
               style: TextStyle(color: Theme.of(context).indicatorColor, fontSize: 16.0),
             ),
