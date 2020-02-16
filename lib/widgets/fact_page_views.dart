@@ -1,6 +1,4 @@
-import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
-import 'package:numbers_game/models/fact.dart';
 import 'package:numbers_game/providers/theme_provider.dart';
 import 'package:numbers_game/utils/connectivity.dart';
 import 'package:numbers_game/webapis/services.dart';
@@ -15,8 +13,11 @@ class FactPageView extends StatefulWidget {
 class _FactPageViewState extends State<FactPageView>
     with SingleTickerProviderStateMixin {
   final controller = PageController(initialPage: 0, viewportFraction: 0.8);
+  Color _colorValue = Colors.blue;
+  double _size = 180.0;
   bool isNumberFactLoading = false,
       isGeneralFactLoading = false,
+      isQuotaFactLoading = false,
       isCatFactLoading = false;
   @override
   void initState() {
@@ -52,57 +53,179 @@ class _FactPageViewState extends State<FactPageView>
         Container(
           color: Colors.transparent,
           child: Card(
-              color: Colors.purpleAccent,
+              color: Colors.redAccent,
               elevation: 8,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),
               ),
               margin: EdgeInsets.symmetric(vertical: 80.0, horizontal: 10.0),
-              child: InkWell(
-                borderRadius: BorderRadius.circular(30.0),
-                onTap: () {
-                  if (isNumberFactLoading || isCatFactLoading) return;
-                  setState(() {
-                    isGeneralFactLoading = true;
-                  });
-                  _getFact(context);
-                },
-                child: Center(
-                  child: isGeneralFactLoading
-                      ? CircularProgressIndicator(
-                          valueColor:
-                              AlwaysStoppedAnimation<Color>(Colors.white),
-                        )
-                      : Text("General Facts"),
-                ),
+              child: Stack(
+                children: <Widget>[
+                  Align(
+                      alignment: Alignment.topCenter,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: Text(
+                          "Fun Facts",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 30.0,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      )),
+                  Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 16.0),
+                        child: Text("Click to get Fun Facts",
+                            style: TextStyle(
+                                color: Colors.white60, fontSize: 15.0)),
+                      )),
+                  Center(
+                    child: isGeneralFactLoading
+                        ? CircularProgressIndicator(
+                            valueColor:
+                                AlwaysStoppedAnimation<Color>(Colors.white),
+                          )
+                        : SizedBox.shrink(),
+                  ),
+                  Center(
+                    child: TweenAnimationBuilder<double>(
+                      tween: Tween<double>(begin: 60.0, end: _size),
+                      duration: Duration(seconds: 2),
+                      curve: Curves.elasticInOut,
+                      builder: (_, double size, Widget child) {
+                        return Ink.image(
+                          image: AssetImage("assets/images/fun-fact.png"),
+                          height: size,
+                          child: InkWell(
+                            onTap: () {
+                              if (isNumberFactLoading ||
+                                  isCatFactLoading ||
+                                  isQuotaFactLoading) return;
+                              setState(() {
+                                isGeneralFactLoading = true;
+                              });
+                              _getFact(context);
+                            },
+                          ),
+                        );
+                      },
+                      onEnd: () =>
+                          setState(() => _size = _size == 180.0 ? 60.0 : 180.0),
+                    ),
+                  )
+                ],
               )),
         ),
         Container(
           color: Colors.transparent,
           child: Card(
-            color: Colors.amberAccent,
+            color: Colors.blueAccent,
             elevation: 8,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
             ),
             margin: EdgeInsets.symmetric(vertical: 80.0, horizontal: 10.0),
-            child: InkWell(
+            child: Stack(
+              children: <Widget>[
+                Align(
+                      alignment: Alignment.topCenter,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: Text(
+                          "Quota Facts",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 30.0,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      )),
+                  Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 16.0),
+                        child: Text("Click to get Quota Facts",
+                            style: TextStyle(
+                                color: Colors.white60, fontSize: 15.0)),
+                      )),
+                Center(
+                  child: isCatFactLoading
+                      ? CircularProgressIndicator(
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Colors.white),
+                        )
+                      : Text("Quota Facts Image"),
+                )
+              ],
+            ),
+          ),
+        ),
+        Container(
+          color: Colors.transparent,
+          child: Card(
+            color: Colors.black,
+            elevation: 8,
+            shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
-              onTap: () {
-                if (isNumberFactLoading || isGeneralFactLoading) return;
-                setState(() {
-                  isCatFactLoading = true;
-                });
-                _getFact(context);
-              },
-              child: Center(
+            ),
+            margin: EdgeInsets.symmetric(vertical: 80.0, horizontal: 10.0),
+            child: Stack(children: [
+              Align(
+                  alignment: Alignment.topCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Text(
+                      "Cat Facts",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  )),
+              Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 16.0),
+                    child: Text("Click to get Facts about Cats",
+                        style:
+                            TextStyle(color: Colors.white60, fontSize: 15.0)),
+                  )),
+              Center(
                 child: isCatFactLoading
                     ? CircularProgressIndicator(
                         valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                       )
-                    : Text("Cat Facts"),
+                    : SizedBox.shrink(),
               ),
-            ),
+              Center(
+                child: TweenAnimationBuilder<Color>(
+                  tween: ColorTween(begin: Colors.red, end: _colorValue),
+                  duration: const Duration(seconds: 2),
+                  curve: Curves.easeInOut,
+                  builder: (BuildContext _, Color value, Widget child) {
+                    return Ink.image(
+                      image: AssetImage("assets/images/cat-eye.jpg"),
+                      colorFilter: ColorFilter.mode(value, BlendMode.modulate),
+                      fit: BoxFit.contain,
+                      child: InkWell(
+                        onTap: () {
+                          if (isNumberFactLoading ||
+                              isGeneralFactLoading ||
+                              isQuotaFactLoading) return;
+                          setState(() {
+                            isCatFactLoading = true;
+                          });
+                          _getFact(context);
+                        },
+                      ),
+                    );
+                  },
+                  onEnd: () => setState(() => _colorValue =
+                      _colorValue == Colors.blue ? Colors.red : Colors.blue),
+                ),
+              ),
+            ]),
           ),
         ),
       ],
@@ -118,7 +241,7 @@ class _FactPageViewState extends State<FactPageView>
           setState(() {
             isGeneralFactLoading = false;
           });
-          _showFact(context, "Cool Fact", generalFact.text);
+          _showFact(context, "Fun Fact", generalFact.text);
         });
       } else if (isCatFactLoading) {
         getCatFact().then((catFact) {
