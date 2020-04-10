@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io' show Platform;
 
 import 'package:flutter/material.dart';
 import 'package:fluttie/fluttie.dart';
@@ -19,7 +20,9 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-    prepareAnimation();
+    if (!Platform.isIOS) {
+      prepareAnimation();
+    }
     startTimeout();
   }
 
@@ -37,18 +40,18 @@ class _SplashState extends State<Splash> {
       child: Center(
         child: ready
             ? SizedBox(
-              width: 450,
-              height: 380,
-              child: FluttieAnimation(emojiAnimation),
-            )
+                width: 450,
+                height: 380,
+                child: FluttieAnimation(emojiAnimation),
+              )
             : SizedBox(
-              height: 50,
-              width: 50,
-              child: CircularProgressIndicator(
-                value: null,
-                strokeWidth: 3.0,
+                height: 50,
+                width: 50,
+                child: CircularProgressIndicator(
+                  value: null,
+                  strokeWidth: 3.0,
+                ),
               ),
-            ),
       ),
     );
   }

@@ -294,8 +294,8 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
+                SafeArea(
+                  minimum: const EdgeInsets.all(16.0),
                   child: Text(
                     fact.text,
                     style: TextStyle(
@@ -308,6 +308,8 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               ],
             );
           });
+    }).catchError((error, stackTrace) {
+      _showError(error.toString());
     });
   }
 

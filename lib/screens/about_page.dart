@@ -110,8 +110,8 @@ class _AboutPageState extends State<AboutPage> {
             ),
           ),
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
+            child: SafeArea(
+              minimum: const EdgeInsets.only(bottom: 8.0),
               child: Align(
                 alignment: FractionalOffset.bottomCenter,
                 child: Column(
