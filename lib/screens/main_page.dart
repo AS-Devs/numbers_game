@@ -6,6 +6,9 @@ import 'package:numbers_game/utils/connectivity.dart';
 import 'package:numbers_game/webapis/services.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
+import 'package:firebase_admob/firebase_admob.dart';
+
+const String testDevice = '';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key key}) : super(key: key);
@@ -25,11 +28,36 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   List<int> year = [0, 0, 0, 0];
   bool buttonClicked = false;
   String factNumberText = "Fact";
+  BannerAd _bannerAd;
+  static const MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
+    testDevices: testDevice != null ? <String>[testDevice] : null,
+    nonPersonalizedAds: true,
+    keywords: <String>['Game', 'Fun', 'Mario', 'Pubg'],
+  );
+  
+  BannerAd createBannerAd() {
+    return BannerAd(
+      adUnitId: BannerAd.testAdUnitId,
+      size: AdSize.smartBanner,
+      targetingInfo: targetingInfo,
+      listener: (MobileAdEvent event) {
+        print("BannerAd event $event");
+      },
+    );
+  }
 
   @override
   void initState() {
     super.initState();
     controller = TextEditingController();
+    // FirebaseAdMob.instance.initialize(appId: BannerAd.testAdUnitId);
+    // _bannerAd = createBannerAd()..load()..show();
+    
+  }
+  @override
+  void dispose() {
+    super.dispose();
+    // _bannerAd.dispose();
   }
 
   @override
