@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:numbers_game/providers/theme_provider.dart';
 import 'package:numbers_game/utils/connectivity.dart';
 import 'package:numbers_game/webapis/services.dart';
+import 'package:numbers_game/widgets/number_fact_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 
@@ -34,22 +35,40 @@ class _FactPageViewState extends State<FactPageView>
       physics: BouncingScrollPhysics(),
       children: <Widget>[
         Container(
-          color: Colors.transparent,
-          child: Card(
-              color: Colors.deepOrangeAccent,
-              elevation: 8,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0),
-              ),
-              margin: EdgeInsets.symmetric(vertical: 80.0, horizontal: 10.0),
-              child: InkWell(
-                borderRadius: BorderRadius.circular(30.0),
-                child: Center(
-                  child: Text("Number Facts"),
+            color: Colors.transparent,
+            child: Card(
+                color: themeProvider.getTheme.cardColor,
+                elevation: 8,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
                 ),
-                onTap: () {},
-              )),
-        ),
+                margin: EdgeInsets.symmetric(vertical: 80.0, horizontal: 10.0),
+                child: Stack(
+                  children: <Widget>[
+                    Align(
+                        alignment: Alignment.topCenter,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: Text(
+                            "Number Facts",
+                            style: TextStyle(
+                                color: themeProvider.getTheme.indicatorColor,
+                                fontSize: 30.0,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        )),
+                    Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 16.0),
+                          child: Text("Choose any type of Number Fact",
+                              style: TextStyle(
+                                  color: themeProvider.getTheme.indicatorColor,
+                                  fontSize: 15.0)),
+                        )),
+                    NumberFactWidget()
+                  ],
+                ))),
         Container(
           color: Colors.transparent,
           child: Card(
@@ -91,6 +110,7 @@ class _FactPageViewState extends State<FactPageView>
                   ),
                   Center(
                     child: TweenAnimationBuilder<double>(
+                      key: UniqueKey(),
                       tween: Tween<double>(begin: 60.0, end: _size),
                       duration: Duration(seconds: 2),
                       curve: Curves.elasticInOut,
@@ -130,25 +150,25 @@ class _FactPageViewState extends State<FactPageView>
             child: Stack(
               children: <Widget>[
                 Align(
-                      alignment: Alignment.topCenter,
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
-                        child: Text(
-                          "Quota Facts",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 30.0,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      )),
-                  Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 16.0),
-                        child: Text("Click to get Quota Facts",
-                            style: TextStyle(
-                                color: Colors.white60, fontSize: 15.0)),
-                      )),
+                    alignment: Alignment.topCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Text(
+                        "Quota Facts",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 30.0,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    )),
+                Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 16.0),
+                      child: Text("Click to get Quota Facts",
+                          style:
+                              TextStyle(color: Colors.white60, fontSize: 15.0)),
+                    )),
                 Center(
                   child: isCatFactLoading
                       ? CircularProgressIndicator(
@@ -200,6 +220,7 @@ class _FactPageViewState extends State<FactPageView>
               ),
               Center(
                 child: TweenAnimationBuilder<Color>(
+                  key: UniqueKey(),
                   tween: ColorTween(begin: Colors.red, end: _colorValue),
                   duration: const Duration(seconds: 2),
                   curve: Curves.easeInOut,
@@ -284,6 +305,14 @@ class _FactPageViewState extends State<FactPageView>
                             fontSize: 38.0,
                             fontWeight: FontWeight.w600),
                       ),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.save),
+                      padding: EdgeInsets.zero,
+                      color: Theme.of(context).primaryColor,
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                     ),
                     IconButton(
                       icon: Icon(Icons.share),
