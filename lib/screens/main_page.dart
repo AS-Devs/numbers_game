@@ -50,14 +50,14 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     controller = TextEditingController();
-    // FirebaseAdMob.instance.initialize(appId: BannerAd.testAdUnitId);
-    // _bannerAd = createBannerAd()..load()..show();
+    FirebaseAdMob.instance.initialize(appId: BannerAd.testAdUnitId);
+    _bannerAd = createBannerAd()..load()..show();
     
   }
   @override
   void dispose() {
     super.dispose();
-    // _bannerAd.dispose();
+    _bannerAd.dispose();
   }
 
   @override

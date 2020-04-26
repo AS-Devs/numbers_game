@@ -11,6 +11,9 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="Random Facts"
         android:icon="@mipmap/launcher_icon">
+        <meta-data 
+                android:name="com.google.android.gms.ads.APPLICATION_ID" 
+                android:value="ca-app-pub-3774806131455333~7232968785" />
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
@@ -25,9 +28,6 @@
             <meta-data
                 android:name="io.flutter.app.android.SplashScreenUntilFirstFrame"
                 android:value="true" />
-            <meta-data 
-                android:name="com.google.android.gms.ads.APPLICATION_ID" 
-                android:value="ca-app-pub-3774806131455333~7232968785" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
